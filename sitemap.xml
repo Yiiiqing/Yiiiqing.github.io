@@ -2,63 +2,63 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>http://example.com/2020/11/05/js-%E5%B8%B8%E7%94%A8%E6%96%B9%E6%B3%95/</loc>
+    <loc>http://yiqing.github.io/2020/11/05/js-%E5%B8%B8%E7%94%A8%E6%96%B9%E6%B3%95/</loc>
     
     <lastmod>2020-11-05</lastmod>
     
   </url>
   
   <url>
-    <loc>http://example.com/categories/index.html</loc>
+    <loc>http://yiqing.github.io/categories/index.html</loc>
     
     <lastmod>2020-11-05</lastmod>
     
   </url>
   
   <url>
-    <loc>http://example.com/tags/index.html</loc>
+    <loc>http://yiqing.github.io/tags/index.html</loc>
     
     <lastmod>2020-11-05</lastmod>
     
   </url>
   
   <url>
-    <loc>http://example.com/2020/11/05/Spring%E9%85%8D%E7%BD%AE/</loc>
+    <loc>http://yiqing.github.io/2020/11/05/Spring%E9%85%8D%E7%BD%AE/</loc>
     
     <lastmod>2020-11-05</lastmod>
     
   </url>
   
   <url>
-    <loc>http://example.com/books/index.html</loc>
+    <loc>http://yiqing.github.io/books/index.html</loc>
     
     <lastmod>2020-11-04</lastmod>
     
   </url>
   
   <url>
-    <loc>http://example.com/links/index.html</loc>
+    <loc>http://yiqing.github.io/links/index.html</loc>
     
     <lastmod>2020-11-04</lastmod>
     
   </url>
   
   <url>
-    <loc>http://example.com/repository/index.html</loc>
+    <loc>http://yiqing.github.io/repository/index.html</loc>
     
     <lastmod>2020-11-04</lastmod>
     
   </url>
   
   <url>
-    <loc>http://example.com/404.html</loc>
+    <loc>http://yiqing.github.io/404.html</loc>
     
     <lastmod>2020-11-04</lastmod>
     
   </url>
   
   <url>
-    <loc>http://example.com/about/index.html</loc>
+    <loc>http://yiqing.github.io/about/index.html</loc>
     
     <lastmod>2020-11-04</lastmod>
     
@@ -66,7 +66,7 @@
   
 
   <url>
-    <loc>http://example.com/</loc>
+    <loc>http://yiqing.github.io/</loc>
     <lastmod>2020-11-05</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
@@ -74,35 +74,35 @@
 
   
   <url>
-    <loc>http://example.com/tags/Spring/</loc>
+    <loc>http://yiqing.github.io/tags/Spring/</loc>
     <lastmod>2020-11-05</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
-    <loc>http://example.com/tags/Mybatis/</loc>
+    <loc>http://yiqing.github.io/tags/Mybatis/</loc>
     <lastmod>2020-11-05</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
-    <loc>http://example.com/tags/Maven/</loc>
+    <loc>http://yiqing.github.io/tags/Maven/</loc>
     <lastmod>2020-11-05</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
-    <loc>http://example.com/tags/%E9%85%8D%E7%BD%AE/</loc>
+    <loc>http://yiqing.github.io/tags/%E9%85%8D%E7%BD%AE/</loc>
     <lastmod>2020-11-05</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
-    <loc>http://example.com/tags/JavaScript/</loc>
+    <loc>http://yiqing.github.io/tags/JavaScript/</loc>
     <lastmod>2020-11-05</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -111,14 +111,14 @@
 
   
   <url>
-    <loc>http://example.com/categories/Java/</loc>
+    <loc>http://yiqing.github.io/categories/Java/</loc>
     <lastmod>2020-11-05</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
-    <loc>http://example.com/categories/JavaScript/</loc>
+    <loc>http://yiqing.github.io/categories/JavaScript/</loc>
     <lastmod>2020-11-05</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>

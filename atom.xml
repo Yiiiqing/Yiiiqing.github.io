@@ -3,11 +3,11 @@
   <title>仙人一张</title>
   
   
-  <link href="http://example.com/atom.xml" rel="self"/>
+  <link href="http://yiqing.github.io/atom.xml" rel="self"/>
   
-  <link href="http://example.com/"/>
+  <link href="http://yiqing.github.io/"/>
   <updated>2020-11-05T05:32:34.825Z</updated>
-  <id>http://example.com/</id>
+  <id>http://yiqing.github.io/</id>
   
   <author>
     <name>yiqing</name>
@@ -18,8 +18,8 @@
   
   <entry>
     <title>js 常用方法</title>
-    <link href="http://example.com/2020/11/05/js-%E5%B8%B8%E7%94%A8%E6%96%B9%E6%B3%95/"/>
-    <id>http://example.com/2020/11/05/js-%E5%B8%B8%E7%94%A8%E6%96%B9%E6%B3%95/</id>
+    <link href="http://yiqing.github.io/2020/11/05/js-%E5%B8%B8%E7%94%A8%E6%96%B9%E6%B3%95/"/>
+    <id>http://yiqing.github.io/2020/11/05/js-%E5%B8%B8%E7%94%A8%E6%96%B9%E6%B3%95/</id>
     <published>2020-11-05T05:20:49.000Z</published>
     <updated>2020-11-05T05:32:34.825Z</updated>
     
@@ -33,17 +33,17 @@
     
     
     
-    <category term="JavaScript" scheme="http://example.com/categories/JavaScript/"/>
+    <category term="JavaScript" scheme="http://yiqing.github.io/categories/JavaScript/"/>
     
     
-    <category term="JavaScript" scheme="http://example.com/tags/JavaScript/"/>
+    <category term="JavaScript" scheme="http://yiqing.github.io/tags/JavaScript/"/>
     
   </entry>
   
   <entry>
     <title>Spring配置</title>
-    <link href="http://example.com/2020/11/05/Spring%E9%85%8D%E7%BD%AE/"/>
-    <id>http://example.com/2020/11/05/Spring%E9%85%8D%E7%BD%AE/</id>
+    <link href="http://yiqing.github.io/2020/11/05/Spring%E9%85%8D%E7%BD%AE/"/>
+    <id>http://yiqing.github.io/2020/11/05/Spring%E9%85%8D%E7%BD%AE/</id>
     <published>2020-11-05T01:46:58.000Z</published>
     <updated>2020-11-05T01:55:29.577Z</updated>
     
@@ -57,16 +57,16 @@
     
     
     
-    <category term="Java" scheme="http://example.com/categories/Java/"/>
+    <category term="Java" scheme="http://yiqing.github.io/categories/Java/"/>
     
     
-    <category term="Spring" scheme="http://example.com/tags/Spring/"/>
+    <category term="Spring" scheme="http://yiqing.github.io/tags/Spring/"/>
     
-    <category term="Mybatis" scheme="http://example.com/tags/Mybatis/"/>
+    <category term="Mybatis" scheme="http://yiqing.github.io/tags/Mybatis/"/>
     
-    <category term="Maven" scheme="http://example.com/tags/Maven/"/>
+    <category term="Maven" scheme="http://yiqing.github.io/tags/Maven/"/>
     
-    <category term="配置" scheme="http://example.com/tags/%E9%85%8D%E7%BD%AE/"/>
+    <category term="配置" scheme="http://yiqing.github.io/tags/%E9%85%8D%E7%BD%AE/"/>
     
   </entry>
   
