@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://yiiiqing.github.io/2020/11/09/SpringMVC%E4%B8%AD%E4%BD%BF%E7%94%A8RestFul%E9%A3%8E%E6%A0%BC/</loc>
+    
+    <lastmod>2020-11-09</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://yiiiqing.github.io/2020/11/09/Tomcat%E9%87%8D%E6%96%B0%E9%83%A8%E7%BD%B2%E9%A1%B9%E7%9B%AE%E5%9F%BA%E6%9C%AC%E8%A7%84%E5%88%99/</loc>
     
     <lastmod>2020-11-09</lastmod>
@@ -145,6 +152,13 @@
   
   <url>
     <loc>http://yiiiqing.github.io/tags/Tomcat/</loc>
+    <lastmod>2020-11-09</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>http://yiiiqing.github.io/tags/Spring-SpringMVC-RestFul/</loc>
     <lastmod>2020-11-09</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
