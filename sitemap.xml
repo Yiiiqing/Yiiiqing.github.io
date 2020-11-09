@@ -2,7 +2,21 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://yiiiqing.github.io/2020/11/09/Tomcat%E9%87%8D%E6%96%B0%E9%83%A8%E7%BD%B2%E9%A1%B9%E7%9B%AE%E5%9F%BA%E6%9C%AC%E8%A7%84%E5%88%99/</loc>
+    
+    <lastmod>2020-11-09</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://yiiiqing.github.io/2020/11/06/SpringMVC/</loc>
+    
+    <lastmod>2020-11-09</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://yiiiqing.github.io/2020/11/05/Spring%E9%85%8D%E7%BD%AE/</loc>
     
     <lastmod>2020-11-06</lastmod>
     
@@ -24,13 +38,6 @@
   
   <url>
     <loc>http://yiiiqing.github.io/tags/index.html</loc>
-    
-    <lastmod>2020-11-05</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://yiiiqing.github.io/2020/11/05/Spring%E9%85%8D%E7%BD%AE/</loc>
     
     <lastmod>2020-11-05</lastmod>
     
@@ -74,7 +81,7 @@
 
   <url>
     <loc>http://yiiiqing.github.io/</loc>
-    <lastmod>2020-11-06</lastmod>
+    <lastmod>2020-11-09</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
@@ -82,49 +89,63 @@
   
   <url>
     <loc>http://yiiiqing.github.io/tags/Spring/</loc>
-    <lastmod>2020-11-06</lastmod>
+    <lastmod>2020-11-09</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>http://yiiiqing.github.io/tags/Mybatis/</loc>
-    <lastmod>2020-11-06</lastmod>
+    <lastmod>2020-11-09</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>http://yiiiqing.github.io/tags/Maven/</loc>
-    <lastmod>2020-11-06</lastmod>
+    <lastmod>2020-11-09</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>http://yiiiqing.github.io/tags/%E9%85%8D%E7%BD%AE/</loc>
-    <lastmod>2020-11-06</lastmod>
+    <lastmod>2020-11-09</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>http://yiiiqing.github.io/tags/JavaScript/</loc>
-    <lastmod>2020-11-06</lastmod>
+    <lastmod>2020-11-09</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>http://yiiiqing.github.io/tags/SpringMVC/</loc>
-    <lastmod>2020-11-06</lastmod>
+    <lastmod>2020-11-09</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>http://yiiiqing.github.io/tags/Java/</loc>
-    <lastmod>2020-11-06</lastmod>
+    <lastmod>2020-11-09</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>http://yiiiqing.github.io/tags/idea/</loc>
+    <lastmod>2020-11-09</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>http://yiiiqing.github.io/tags/Tomcat/</loc>
+    <lastmod>2020-11-09</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
@@ -133,14 +154,14 @@
   
   <url>
     <loc>http://yiiiqing.github.io/categories/Java/</loc>
-    <lastmod>2020-11-06</lastmod>
+    <lastmod>2020-11-09</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>http://yiiiqing.github.io/categories/JavaScript/</loc>
-    <lastmod>2020-11-06</lastmod>
+    <lastmod>2020-11-09</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
