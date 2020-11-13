@@ -68,11 +68,11 @@
     
     <category term="Node.js" scheme="http://yiiiqing.github.io/tags/Node-js/"/>
     
-    <category term="Sequelize" scheme="http://yiiiqing.github.io/tags/Sequelize/"/>
-    
     <category term="Express" scheme="http://yiiiqing.github.io/tags/Express/"/>
     
     <category term="koa" scheme="http://yiiiqing.github.io/tags/koa/"/>
+    
+    <category term="Sequelize" scheme="http://yiiiqing.github.io/tags/Sequelize/"/>
     
   </entry>
   
@@ -215,11 +215,11 @@
     
     <category term="Spring" scheme="http://yiiiqing.github.io/tags/Spring/"/>
     
+    <category term="SpringMVC" scheme="http://yiiiqing.github.io/tags/SpringMVC/"/>
+    
     <category term="Mybatis" scheme="http://yiiiqing.github.io/tags/Mybatis/"/>
     
     <category term="配置" scheme="http://yiiiqing.github.io/tags/%E9%85%8D%E7%BD%AE/"/>
-    
-    <category term="SpringMVC" scheme="http://yiiiqing.github.io/tags/SpringMVC/"/>
     
     <category term="项目" scheme="http://yiiiqing.github.io/tags/%E9%A1%B9%E7%9B%AE/"/>
     
@@ -247,11 +247,11 @@
     
     <category term="Spring" scheme="http://yiiiqing.github.io/tags/Spring/"/>
     
+    <category term="SpringMVC" scheme="http://yiiiqing.github.io/tags/SpringMVC/"/>
+    
     <category term="Mybatis" scheme="http://yiiiqing.github.io/tags/Mybatis/"/>
     
     <category term="配置" scheme="http://yiiiqing.github.io/tags/%E9%85%8D%E7%BD%AE/"/>
-    
-    <category term="SpringMVC" scheme="http://yiiiqing.github.io/tags/SpringMVC/"/>
     
     <category term="项目" scheme="http://yiiiqing.github.io/tags/%E9%A1%B9%E7%9B%AE/"/>
     
@@ -312,9 +312,9 @@
     
     <category term="Spring" scheme="http://yiiiqing.github.io/tags/Spring/"/>
     
-    <category term="配置" scheme="http://yiiiqing.github.io/tags/%E9%85%8D%E7%BD%AE/"/>
-    
     <category term="SpringMVC" scheme="http://yiiiqing.github.io/tags/SpringMVC/"/>
+    
+    <category term="配置" scheme="http://yiiiqing.github.io/tags/%E9%85%8D%E7%BD%AE/"/>
     
   </entry>
   
@@ -427,9 +427,9 @@
     
     <category term="Spring" scheme="http://yiiiqing.github.io/tags/Spring/"/>
     
-    <category term="配置" scheme="http://yiiiqing.github.io/tags/%E9%85%8D%E7%BD%AE/"/>
-    
     <category term="SpringMVC" scheme="http://yiiiqing.github.io/tags/SpringMVC/"/>
+    
+    <category term="配置" scheme="http://yiiiqing.github.io/tags/%E9%85%8D%E7%BD%AE/"/>
     
     <category term="Java" scheme="http://yiiiqing.github.io/tags/Java/"/>
     
@@ -483,9 +483,9 @@
     
     <category term="Mybatis" scheme="http://yiiiqing.github.io/tags/Mybatis/"/>
     
-    <category term="Maven" scheme="http://yiiiqing.github.io/tags/Maven/"/>
-    
     <category term="配置" scheme="http://yiiiqing.github.io/tags/%E9%85%8D%E7%BD%AE/"/>
+    
+    <category term="Maven" scheme="http://yiiiqing.github.io/tags/Maven/"/>
     
   </entry>
   
