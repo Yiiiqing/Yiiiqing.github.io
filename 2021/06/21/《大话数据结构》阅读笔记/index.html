@@ -1,0 +1,770 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head>
+  <meta charset="utf-8">
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="Cache-Control" content="no-transform" />
+  <meta http-equiv="Cache-Control" content="no-siteapp" />
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="format-detection" content="telephone=no,email=no,adress=no">
+  <!-- Color theme for statusbar -->
+  <meta name="theme-color" content="#000000" />
+  <!-- 强制页面在当前窗口以独立页面显示,防止别人在框架里调用页面 -->
+  <meta http-equiv="window-target" content="_top" />
+  
+  
+  <title>《大话数据结构》阅读笔记 | 仙人一张</title>
+  <meta name="description" content="《大话数据结构》读书笔记 这是在补数据结构时候做的笔记 笔记中的引用模块代表自己的一些想法 1. 数据结构绪论数据结构：相互之间存在一种或多种特定关系的数据元素的集合 学科：数据结构是一门研究非数值计算的程序设计问题中的操作对象，以及它们之间的关系和操作等相关问题的学科 1.4 基本概念和术语1.4.1 数据数据：是描述客观事物的符号，是计算机中可以操作的对象，是能被计算机识别，并输入给计算机处理">
+<meta property="og:type" content="article">
+<meta property="og:title" content="《大话数据结构》阅读笔记">
+<meta property="og:url" content="http://yiiiqing.github.io/2021/06/21/%E3%80%8A%E5%A4%A7%E8%AF%9D%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E3%80%8B%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0/index.html">
+<meta property="og:site_name" content="仙人一张">
+<meta property="og:description" content="《大话数据结构》读书笔记 这是在补数据结构时候做的笔记 笔记中的引用模块代表自己的一些想法 1. 数据结构绪论数据结构：相互之间存在一种或多种特定关系的数据元素的集合 学科：数据结构是一门研究非数值计算的程序设计问题中的操作对象，以及它们之间的关系和操作等相关问题的学科 1.4 基本概念和术语1.4.1 数据数据：是描述客观事物的符号，是计算机中可以操作的对象，是能被计算机识别，并输入给计算机处理">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2021-06-21T09:36:26.000Z">
+<meta property="article:modified_time" content="2021-06-22T09:41:12.000Z">
+<meta property="article:author" content="yiqing">
+<meta property="article:tag" content="数据结构">
+<meta name="twitter:card" content="summary">
+  <!-- Canonical links -->
+  <link rel="canonical" href="http://yiiiqing.github.io/2021/06/21/%E3%80%8A%E5%A4%A7%E8%AF%9D%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E3%80%8B%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0/index.html">
+  
+    <link rel="alternate" href="/atom.xml" title="仙人一张" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png" type="image/x-icon">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+  
+  
+  
+<meta name="generator" content="Hexo 5.2.0"></head>
+
+
+<body class="main-center theme-black" itemscope itemtype="http://schema.org/WebPage">
+  <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+  <div class="slimContent">
+    <div class="navbar-header">
+      
+      
+      <div class="profile-block text-center">
+        <a id="avatar" href="https://github.com/yiiiqing" target="_blank">
+          <img class="img-circle img-rotate" src="/images/avatar.jpg" width="200" height="200">
+        </a>
+        <h2 id="name" class="hidden-xs hidden-sm">Yiqing</h2>
+        <h3 id="title" class="hidden-xs hidden-sm hidden-md">Web Developer</h3>
+        <small id="location" class="text-muted hidden-xs hidden-sm"><i class="icon icon-map-marker"></i> Shanghai, China</small>
+      </div>
+      
+      <div class="search" id="search-form-wrap">
+
+    <form class="search-form sidebar-form">
+        <div class="input-group">
+            <input type="text" class="search-form-input form-control" placeholder="搜索" />
+            <span class="input-group-btn">
+                <button type="submit" class="search-form-submit btn btn-flat" onclick="return false;"><i class="icon icon-search"></i></button>
+            </span>
+        </div>
+    </form>
+    <div class="ins-search">
+  <div class="ins-search-mask"></div>
+  <div class="ins-search-container">
+    <div class="ins-input-wrapper">
+      <input type="text" class="ins-search-input" placeholder="想要查找什么..." x-webkit-speech />
+      <button type="button" class="close ins-close ins-selectable" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+    </div>
+    <div class="ins-section-wrapper">
+      <div class="ins-section-container"></div>
+    </div>
+  </div>
+</div>
+
+
+</div>
+      <button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target="#main-navbar" aria-controls="main-navbar" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+    </div>
+    <nav id="main-navbar" class="collapse navbar-collapse" itemscope itemtype="http://schema.org/SiteNavigationElement" role="navigation">
+      <ul class="nav navbar-nav main-nav ">
+        
+        
+        <li class="menu-item menu-item-home">
+          <a href="/.">
+            
+            <i class="icon icon-home-fill"></i>
+            
+            <span class="menu-title">首页</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives">
+            
+            <i class="icon icon-archives-fill"></i>
+            
+            <span class="menu-title">归档</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories">
+            
+            <i class="icon icon-folder"></i>
+            
+            <span class="menu-title">分类</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags">
+            
+            <i class="icon icon-tags"></i>
+            
+            <span class="menu-title">标签</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-repository">
+          <a href="/repository">
+            
+            <i class="icon icon-project"></i>
+            
+            <span class="menu-title">项目</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-links">
+          <a href="/links">
+            
+            <i class="icon icon-friendship"></i>
+            
+            <span class="menu-title">友链</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about">
+            
+            <i class="icon icon-cup-fill"></i>
+            
+            <span class="menu-title">关于</span>
+          </a>
+        </li>
+        
+      </ul>
+      
+	
+    <ul class="social-links">
+    	
+        <li><a href="https://github.com/yiiiqing" target="_blank" title="Github" data-toggle=tooltip data-placement=top><i class="icon icon-github"></i></a></li>
+        
+        <li><a href="https://weibo.com/6370670336/profile?topnav=1&wvr=6&is_all=1" target="_blank" title="Weibo" data-toggle=tooltip data-placement=top><i class="icon icon-weibo"></i></a></li>
+        
+    </ul>
+
+    </nav>
+  </div>
+</header>
+
+  
+    <aside class="sidebar" itemscope itemtype="http://schema.org/WPSideBar">
+  <div class="slimContent">
+    
+      <div class="widget">
+    <h3 class="widget-title">公告</h3>
+    <div class="widget-body">
+        <div id="board">
+            <div class="content">
+                <p>欢迎交流与分享经验! WechatID - user-yiqing</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">分类</h3>
+    <div class="widget-body">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Design/">Design</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Docker/">Docker</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Java/">Java</a><span class="category-list-count">47</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Java/Redis/">Redis</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Java/%E4%B8%AD%E9%97%B4%E4%BB%B6/">中间件</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/JavaScript/">JavaScript</a><span class="category-list-count">10</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Markdown/">Markdown</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/MySQL/">MySQL</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Node-js/">Node.js</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Redis/">Redis</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Web/">Web</a><span class="category-list-count">14</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%AC%94%E8%AE%B0/">笔记</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%AC%94%E8%AE%B0/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">数据结构</a><span class="category-list-count">1</span></li></ul></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget-body">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/ACID/" rel="tag">ACID</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Actuator/" rel="tag">Actuator</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Ajax/" rel="tag">Ajax</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Ant/" rel="tag">Ant</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Bootstrap/" rel="tag">Bootstrap</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CAP/" rel="tag">CAP</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CDN/" rel="tag">CDN</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CROS/" rel="tag">CROS</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CentOS/" rel="tag">CentOS</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/DI/" rel="tag">DI</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Database/" rel="tag">Database</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Devtools/" rel="tag">Devtools</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Docker/" rel="tag">Docker</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Druid/" rel="tag">Druid</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Error/" rel="tag">Error</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Express/" rel="tag">Express</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Guice/" rel="tag">Guice</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Interceptor/" rel="tag">Interceptor</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/IoC/" rel="tag">IoC</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Isolation/" rel="tag">Isolation</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/" rel="tag">Java</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JavaScript/" rel="tag">JavaScript</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/" rel="tag">Linux</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Markdown/" rel="tag">Markdown</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Maven/" rel="tag">Maven</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MySQL/" rel="tag">MySQL</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Mybatis/" rel="tag">Mybatis</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Mysql/" rel="tag">Mysql</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Nginx/" rel="tag">Nginx</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Node-js/" rel="tag">Node.js</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ORM/" rel="tag">ORM</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/RabbitMQ/" rel="tag">RabbitMQ</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Redis/" rel="tag">Redis</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/RestFul/" rel="tag">RestFul</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Sequelize/" rel="tag">Sequelize</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Shell/" rel="tag">Shell</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spring/" rel="tag">Spring</a><span class="tag-list-count">13</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SpringBoot/" rel="tag">SpringBoot</a><span class="tag-list-count">23</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SpringCloud/" rel="tag">SpringCloud</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SpringMVC/" rel="tag">SpringMVC</a><span class="tag-list-count">8</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/String/" rel="tag">String</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Swagger/" rel="tag">Swagger</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Thymeleaf/" rel="tag">Thymeleaf</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Tomcat/" rel="tag">Tomcat</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/TypeScript/" rel="tag">TypeScript</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Validation/" rel="tag">Validation</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Zookeeper/" rel="tag">Zookeeper</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/async/" rel="tag">async</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/base64/" rel="tag">base64</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/bug/" rel="tag">bug</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/byte/" rel="tag">byte[]</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cron/" rel="tag">cron</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/curl/" rel="tag">curl</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/download/" rel="tag">download</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/express/" rel="tag">express</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/file/" rel="tag">file</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/" rel="tag">git</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/heartbeat/" rel="tag">heartbeat</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/idea/" rel="tag">idea</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/import/" rel="tag">import</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/jdbc/" rel="tag">jdbc</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/koa/" rel="tag">koa</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/maven/" rel="tag">maven</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/npm/" rel="tag">npm</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pm2/" rel="tag">pm2</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/schedule/" rel="tag">schedule</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/upload/" rel="tag">upload</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/utils/" rel="tag">utils</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vi/" rel="tag">vi</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/websocket/" rel="tag">websocket</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/yaml/" rel="tag">yaml</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AD%97%E7%AC%A6%E4%B8%B2/" rel="tag">字符串</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%8A%A5%E9%94%99/" rel="tag">报错</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%8E%92%E5%BA%8F/" rel="tag">排序</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" rel="tag">数据结构</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%A0%B7%E5%BC%8F/" rel="tag">样式</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%85%8D%E7%BD%AE/" rel="tag">配置</a><span class="tag-list-count">16</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%85%8D%E7%BD%AE-Java/" rel="tag">配置 - Java</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%95%9C%E5%83%8F%E6%BA%90/" rel="tag">镜像源</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%A1%B9%E7%9B%AE/" rel="tag">项目</a><span class="tag-list-count">2</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget-body tagcloud">
+      <a href="/tags/ACID/" style="font-size: 13px;">ACID</a> <a href="/tags/Actuator/" style="font-size: 13px;">Actuator</a> <a href="/tags/Ajax/" style="font-size: 13px;">Ajax</a> <a href="/tags/Ant/" style="font-size: 13px;">Ant</a> <a href="/tags/Bootstrap/" style="font-size: 13px;">Bootstrap</a> <a href="/tags/CAP/" style="font-size: 13px;">CAP</a> <a href="/tags/CDN/" style="font-size: 13px;">CDN</a> <a href="/tags/CROS/" style="font-size: 13px;">CROS</a> <a href="/tags/CentOS/" style="font-size: 13px;">CentOS</a> <a href="/tags/DI/" style="font-size: 13.13px;">DI</a> <a href="/tags/Database/" style="font-size: 13px;">Database</a> <a href="/tags/Devtools/" style="font-size: 13px;">Devtools</a> <a href="/tags/Docker/" style="font-size: 13.25px;">Docker</a> <a href="/tags/Druid/" style="font-size: 13px;">Druid</a> <a href="/tags/Error/" style="font-size: 13.13px;">Error</a> <a href="/tags/Express/" style="font-size: 13px;">Express</a> <a href="/tags/Guice/" style="font-size: 13px;">Guice</a> <a href="/tags/Interceptor/" style="font-size: 13.13px;">Interceptor</a> <a href="/tags/IoC/" style="font-size: 13.13px;">IoC</a> <a href="/tags/Isolation/" style="font-size: 13px;">Isolation</a> <a href="/tags/Java/" style="font-size: 13.13px;">Java</a> <a href="/tags/JavaScript/" style="font-size: 13.5px;">JavaScript</a> <a href="/tags/Linux/" style="font-size: 13px;">Linux</a> <a href="/tags/Markdown/" style="font-size: 13px;">Markdown</a> <a href="/tags/Maven/" style="font-size: 13px;">Maven</a> <a href="/tags/MySQL/" style="font-size: 13.38px;">MySQL</a> <a href="/tags/Mybatis/" style="font-size: 13.5px;">Mybatis</a> <a href="/tags/Mysql/" style="font-size: 13.13px;">Mysql</a> <a href="/tags/Nginx/" style="font-size: 13px;">Nginx</a> <a href="/tags/Node-js/" style="font-size: 13.5px;">Node.js</a> <a href="/tags/ORM/" style="font-size: 13.13px;">ORM</a> <a href="/tags/RabbitMQ/" style="font-size: 13px;">RabbitMQ</a> <a href="/tags/Redis/" style="font-size: 13.13px;">Redis</a> <a href="/tags/RestFul/" style="font-size: 13.13px;">RestFul</a> <a href="/tags/Sequelize/" style="font-size: 13.25px;">Sequelize</a> <a href="/tags/Shell/" style="font-size: 13.13px;">Shell</a> <a href="/tags/Spring/" style="font-size: 13.75px;">Spring</a> <a href="/tags/SpringBoot/" style="font-size: 14px;">SpringBoot</a> <a href="/tags/SpringCloud/" style="font-size: 13px;">SpringCloud</a> <a href="/tags/SpringMVC/" style="font-size: 13.63px;">SpringMVC</a> <a href="/tags/String/" style="font-size: 13.13px;">String</a> <a href="/tags/Swagger/" style="font-size: 13.13px;">Swagger</a> <a href="/tags/Thymeleaf/" style="font-size: 13px;">Thymeleaf</a> <a href="/tags/Tomcat/" style="font-size: 13px;">Tomcat</a> <a href="/tags/TypeScript/" style="font-size: 13px;">TypeScript</a> <a href="/tags/Validation/" style="font-size: 13px;">Validation</a> <a href="/tags/Zookeeper/" style="font-size: 13px;">Zookeeper</a> <a href="/tags/async/" style="font-size: 13px;">async</a> <a href="/tags/base64/" style="font-size: 13px;">base64</a> <a href="/tags/bug/" style="font-size: 13px;">bug</a> <a href="/tags/byte/" style="font-size: 13px;">byte[]</a> <a href="/tags/cron/" style="font-size: 13px;">cron</a> <a href="/tags/curl/" style="font-size: 13px;">curl</a> <a href="/tags/download/" style="font-size: 13.13px;">download</a> <a href="/tags/express/" style="font-size: 13.13px;">express</a> <a href="/tags/file/" style="font-size: 13.13px;">file</a> <a href="/tags/git/" style="font-size: 13px;">git</a> <a href="/tags/heartbeat/" style="font-size: 13px;">heartbeat</a> <a href="/tags/idea/" style="font-size: 13px;">idea</a> <a href="/tags/import/" style="font-size: 13px;">import</a> <a href="/tags/jdbc/" style="font-size: 13px;">jdbc</a> <a href="/tags/koa/" style="font-size: 13.25px;">koa</a> <a href="/tags/maven/" style="font-size: 13.13px;">maven</a> <a href="/tags/npm/" style="font-size: 13.13px;">npm</a> <a href="/tags/pm2/" style="font-size: 13px;">pm2</a> <a href="/tags/schedule/" style="font-size: 13px;">schedule</a> <a href="/tags/upload/" style="font-size: 13.13px;">upload</a> <a href="/tags/utils/" style="font-size: 13px;">utils</a> <a href="/tags/vi/" style="font-size: 13px;">vi</a> <a href="/tags/websocket/" style="font-size: 13px;">websocket</a> <a href="/tags/yaml/" style="font-size: 13px;">yaml</a> <a href="/tags/%E5%AD%97%E7%AC%A6%E4%B8%B2/" style="font-size: 13.13px;">字符串</a> <a href="/tags/%E6%8A%A5%E9%94%99/" style="font-size: 13px;">报错</a> <a href="/tags/%E6%8E%92%E5%BA%8F/" style="font-size: 13px;">排序</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" style="font-size: 13px;">数据结构</a> <a href="/tags/%E6%A0%B7%E5%BC%8F/" style="font-size: 13px;">样式</a> <a href="/tags/%E9%85%8D%E7%BD%AE/" style="font-size: 13.88px;">配置</a> <a href="/tags/%E9%85%8D%E7%BD%AE-Java/" style="font-size: 13px;">配置 - Java</a> <a href="/tags/%E9%95%9C%E5%83%8F%E6%BA%90/" style="font-size: 13px;">镜像源</a> <a href="/tags/%E9%A1%B9%E7%9B%AE/" style="font-size: 13.13px;">项目</a>
+    </div>
+  </div>
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget-body">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/06/">六月 2021</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/05/">五月 2021</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/04/">四月 2021</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/03/">三月 2021</a><span class="archive-list-count">16</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/02/">二月 2021</a><span class="archive-list-count">8</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/01/">一月 2021</a><span class="archive-list-count">9</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/12/">十二月 2020</a><span class="archive-list-count">23</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/11/">十一月 2020</a><span class="archive-list-count">31</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget-body">
+      <ul class="recent-post-list list-unstyled no-thumbnail">
+        
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/Docker/">Docker</a>
+              </p>
+              <p class="item-title">
+                <a href="/2021/06/22/MySQL-docker%E5%AE%89%E8%A3%85/" class="title">MySQL-docker安装</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2021-06-22T09:48:39.000Z" itemprop="datePublished">2021-06-22</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/Design/">Design</a>
+              </p>
+              <p class="item-title">
+                <a href="/2021/06/22/%E6%8E%A7%E5%88%B6%E5%8F%8D%E8%BD%AC%E4%B8%8E%E4%BE%9D%E8%B5%96%E6%B3%A8%E5%85%A5/" class="title">控制反转与依赖注入</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2021-06-22T09:43:33.000Z" itemprop="datePublished">2021-06-22</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/Web/">Web</a>
+              </p>
+              <p class="item-title">
+                <a href="/2021/06/22/Guice/" class="title">Guice</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2021-06-22T09:34:11.000Z" itemprop="datePublished">2021-06-22</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/%E7%AC%94%E8%AE%B0/">笔记</a><i class="icon icon-angle-right"></i><a class="category-link" href="/categories/%E7%AC%94%E8%AE%B0/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">数据结构</a>
+              </p>
+              <p class="item-title">
+                <a href="/2021/06/21/%E3%80%8A%E5%A4%A7%E8%AF%9D%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E3%80%8B%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0/" class="title">《大话数据结构》阅读笔记</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2021-06-21T09:36:26.000Z" itemprop="datePublished">2021-06-21</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/Web/">Web</a>
+              </p>
+              <p class="item-title">
+                <a href="/2021/06/20/%E8%BF%87%E6%BB%A4%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E4%B8%AD-%E5%BC%80%E5%A4%B4%E7%9A%84%E6%B3%A8%E9%87%8A/" class="title">过滤配置文件中#开头的注释</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2021-06-20T09:41:55.000Z" itemprop="datePublished">2021-06-20</time>
+              </p>
+            </div>
+          </li>
+          
+      </ul>
+    </div>
+  </div>
+  
+
+    
+  </div>
+</aside>
+
+  
+  
+<main class="main" role="main">
+  <div class="content">
+  <article id="post-《大话数据结构》阅读笔记" class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
+    
+    <div class="article-header">
+      
+        
+  
+    <h1 class="article-title" itemprop="name">
+      《大话数据结构》阅读笔记
+    </h1>
+  
+
+      
+      <div class="article-meta">
+        <span class="article-date">
+    <i class="icon icon-calendar-check"></i>
+	<a href="/2021/06/21/%E3%80%8A%E5%A4%A7%E8%AF%9D%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E3%80%8B%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0/" class="article-date">
+	  <time datetime="2021-06-21T09:36:26.000Z" itemprop="datePublished">2021-06-21</time>
+	</a>
+</span>
+        
+  <span class="article-category">
+    <i class="icon icon-folder"></i>
+    <a class="article-category-link" href="/categories/%E7%AC%94%E8%AE%B0/">笔记</a>►<a class="article-category-link" href="/categories/%E7%AC%94%E8%AE%B0/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">数据结构</a>
+  </span>
+
+        
+  <span class="article-tag">
+    <i class="icon icon-tags"></i>
+	<a class="article-tag-link-link" href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" rel="tag">数据结构</a>
+  </span>
+
+
+        
+	<span class="article-read hidden-xs">
+	    <i class="icon icon-eye-fill" aria-hidden="true"></i>
+	    <span id="busuanzi_container_page_pv">
+			<span id="busuanzi_value_page_pv">0</span>
+		</span>
+	</span>
+
+
+        <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2021/06/21/%E3%80%8A%E5%A4%A7%E8%AF%9D%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E3%80%8B%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0/#comments" class="article-comment-link">评论</a></span>
+        
+	
+		<span class="post-wordcount hidden-xs" itemprop="wordCount">字数统计: 3.4k(字)</span>
+	
+	
+		<span class="post-readcount hidden-xs" itemprop="timeRequired">阅读时长: 12(分)</span>
+	
+
+      </div>
+    </div>
+    <div class="article-entry marked-body" itemprop="articleBody">
+      
+        <h1 id="《大话数据结构》读书笔记"><a href="#《大话数据结构》读书笔记" class="headerlink" title="《大话数据结构》读书笔记"></a>《大话数据结构》读书笔记</h1><hr>
+<p>这是在补数据结构时候做的笔记</p>
+<p>笔记中的引用模块代表自己的一些想法</p>
+<h2 id="1-数据结构绪论"><a href="#1-数据结构绪论" class="headerlink" title="1. 数据结构绪论"></a>1. 数据结构绪论</h2><p>数据结构：<strong>相互之间存在一种或多种特定关系的数据元素的集合</strong></p>
+<p>学科：数据结构是一门研究非数值计算的程序设计问题中的操作对象，以及它们之间的关系和操作等相关问题的学科</p>
+<h3 id="1-4-基本概念和术语"><a href="#1-4-基本概念和术语" class="headerlink" title="1.4 基本概念和术语"></a>1.4 基本概念和术语</h3><h4 id="1-4-1-数据"><a href="#1-4-1-数据" class="headerlink" title="1.4.1 数据"></a>1.4.1 数据</h4><p>数据：是描述客观事物的符号，是计算机中可以操作的对象，是能被计算机识别，并输入给计算机处理的符号集合。</p>
+<p>声音图像等也是可以转化为字符数据来处理的</p>
+<h4 id="1-4-2-数据元素"><a href="#1-4-2-数据元素" class="headerlink" title="1.4.2 数据元素"></a>1.4.2 数据元素</h4><p>数据元素：是组成数据的，有一定意义的基本单位，在计算机中通常作为整体处理。也被称为记录。</p>
+<h4 id="1-4-4-数据对象"><a href="#1-4-4-数据对象" class="headerlink" title="1.4.4 数据对象"></a>1.4.4 数据对象</h4><p>数据对象：是性质相同的数据元素的集合，是数据的子集</p>
+<p>也就是一类数据结构的的集合。个人理解这种东西都是数据而已，没有必要做详细的区分</p>
+<h4 id="1-4-5-数据结构"><a href="#1-4-5-数据结构" class="headerlink" title="1.4.5 数据结构"></a>1.4.5 数据结构</h4><p>数据结构：<strong>相互之间存在一种或多种特定关系的数据元素的集合</strong></p>
+<p>研究数据结构的意义就是了解待处理对象的特性和处理对象之间存在的关系，从而编写出一个好的程序</p>
+<h3 id="1-5-逻辑结构与物理结构"><a href="#1-5-逻辑结构与物理结构" class="headerlink" title="1.5 逻辑结构与物理结构"></a>1.5 逻辑结构与物理结构</h3><h4 id="1-5-1-逻辑结构"><a href="#1-5-1-逻辑结构" class="headerlink" title="1.5.1 逻辑结构"></a>1.5.1 逻辑结构</h4><p>指数据对象中数据元素之间的相互关系。</p>
+<ol>
+<li><p>集合结构</p>
+<p>集合结构中的数据元素除了同属一个集合外，它们之间没有其他关系。</p>
+<p>各个数据元素是平等的，共同属性只是：同属一个集合</p>
+</li>
+<li><p>线性结构</p>
+<p>线性结构中的数据元素之间是一对一关系</p>
+<p>类似链表连起来</p>
+</li>
+<li><p>树形结构</p>
+<p>树形结构中数据元素之间存在一种一对多的层次关系</p>
+</li>
+<li><p>图形结构</p>
+<p>图形结构的数据元素是多对多的关系</p>
+</li>
+</ol>
+<blockquote>
+<p>我认为这几种结构其实是对元素之间关系的一种抽象，两个元素之间：</p>
+<p>无关系：集合</p>
+<p>一对一：线性</p>
+<p>一对多：树</p>
+<p>多对多：图</p>
+</blockquote>
+<h4 id="1-5-2-物理结构（存储结构）"><a href="#1-5-2-物理结构（存储结构）" class="headerlink" title="1.5.2 物理结构（存储结构）"></a>1.5.2 物理结构（存储结构）</h4><p>是指数据的逻辑结构在计算机中的存储形式</p>
+<p>存储结构应正确<strong>反映</strong>数据元素之间的<strong>逻辑关系</strong>，这是重点和难点</p>
+<p>两种：顺序存储和链式存储</p>
+<ol>
+<li><p>顺序存储结构</p>
+<p>把数据元素存放在地址连续的存储单元里，其数据间的逻辑关系和物理关系是一致的</p>
+</li>
+<li><p>链式存储结构</p>
+<p>把数据元素存放在任意的存储单元里，这组存储单元可以是连续的，也可以是不连续的</p>
+<p>存储关系不能反映逻辑关系，因此需要指针存放关联元素位置</p>
+</li>
+</ol>
+<h3 id="1-6-抽象数据类型"><a href="#1-6-抽象数据类型" class="headerlink" title="1.6 抽象数据类型"></a>1.6 抽象数据类型</h3><h4 id="1-6-1-数据类型"><a href="#1-6-1-数据类型" class="headerlink" title="1.6.1 数据类型"></a>1.6.1 数据类型</h4><p>数据类型：指一组<strong>性质相同</strong>的值的集合及定义在此集合上的一些操作的总称</p>
+<p>因为高级语言开发，不用考虑整数在计算机内部表示方式，CPU 为了加减具体实现了什么，无论什么计算机，什么语言，一般都会有整数运算，字符运算等，我们可以抽象出来</p>
+<h4 id="1-6-2-抽象数据类型"><a href="#1-6-2-抽象数据类型" class="headerlink" title="1.6.2 抽象数据类型"></a>1.6.2 抽象数据类型</h4><p>Abstract Data Type：是指一个数学模型及定义在该模型上的一组操作</p>
+<p>比如整型，操作有加减乘除</p>
+<p>比如 point，有x，y，z</p>
+<p><strong>抽象数据类型体现了程序设计中问题分解，抽象和信息隐藏的特性</strong></p>
+<h2 id="2-算法"><a href="#2-算法" class="headerlink" title="2. 算法"></a>2. 算法</h2><h3 id="2-2-数据结构与算法关系"><a href="#2-2-数据结构与算法关系" class="headerlink" title="2.2 数据结构与算法关系"></a>2.2 数据结构与算法关系</h3><p>就是相辅相成的关系</p>
+<h3 id="2-3-两种算法的比较"><a href="#2-3-两种算法的比较" class="headerlink" title="2.3 两种算法的比较"></a>2.3 两种算法的比较</h3><p>举例一个 1+2+3+…+100</p>
+<p>可以直接用 for 循环写，但是也可以构造另一个 100+99+…+1的序列，两者相加除 2</p>
+<p>用程序来实现就是</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> i,sum=<span class="number">0</span>,n=<span class="number">100</span>;</span><br><span class="line">sum = (<span class="number">1</span>+n)*n/<span class="number">2</span>;</span><br><span class="line"><span class="built_in">printf</span>(<span class="string">&quot;5d&quot;</span>,sum);</span><br></pre></td></tr></table></figure>
+
+<p>明显这一种方法会更快，如果第一种要循环</p>
+<h3 id="2-4-算法定义"><a href="#2-4-算法定义" class="headerlink" title="2.4 算法定义"></a>2.4 算法定义</h3><p><strong>算法是解决特定问题求解步骤的描述,在计算机中表现为指令的有限序列,并且每条指令表示一个或多个操作.</strong></p>
+<p>没有通用的算法可以解决所有问题!</p>
+<h3 id="2-5-算法的特性"><a href="#2-5-算法的特性" class="headerlink" title="2.5 算法的特性"></a>2.5 算法的特性</h3><p>五个基本特性:输入,输出,有穷性,确定性和可行性</p>
+<h4 id="2-5-1-输入输出"><a href="#2-5-1-输入输出" class="headerlink" title="2.5.1 输入输出"></a>2.5.1 输入输出</h4><p>算法有零个或多个输入</p>
+<p>算法有一个或多个输出</p>
+<blockquote>
+<p>肯定会有输出,不一定有输入</p>
+<p>很好理解,没输出的话用算法干嘛,闲的吗</p>
+</blockquote>
+<h4 id="2-5-2-有穷性"><a href="#2-5-2-有穷性" class="headerlink" title="2.5.2 有穷性"></a>2.5.2 有穷性</h4><p>算法在执行有限的步骤之后,自动结束而不会出现无限循环,并且每个步骤在可接受的时间内完成</p>
+<blockquote>
+<p>所以,死循环就不满足这个特性</p>
+<p>有穷是实际应用中的有穷,不是数学意义上的</p>
+</blockquote>
+<h4 id="2-5-3-确定性"><a href="#2-5-3-确定性" class="headerlink" title="2.5.3 确定性"></a>2.5.3 确定性</h4><p>算法的每一步都有确定的含义,不会出现二义性</p>
+<h4 id="2-5-4-可行性"><a href="#2-5-4-可行性" class="headerlink" title="2.5.4 可行性"></a>2.5.4 可行性</h4><p>算法的每一步必须是可行的</p>
+<blockquote>
+<p>也就是说能用,能在计算机上运行</p>
+</blockquote>
+<h3 id="2-6-算法设计的要求"><a href="#2-6-算法设计的要求" class="headerlink" title="2.6 算法设计的要求"></a>2.6 算法设计的要求</h3><p>解决问题的算法不是唯一的,但是相对好的算法对于解决问题才有帮助</p>
+<h4 id="2-6-1-正确性"><a href="#2-6-1-正确性" class="headerlink" title="2.6.1 正确性"></a>2.6.1 正确性</h4><p>算法的正确性: 是指算法至少应该拥有输入输出和加工处理无歧义性,能正确反映问题的需求,能够得到问题的正确答案</p>
+<p>正确有四个层次,一般我们以第三层次作为判断算法是否正确的标准,即:</p>
+<p>算法程序对于非法的输入数据能够得出满足规格说明的结果</p>
+<h4 id="2-6-2-可读性"><a href="#2-6-2-可读性" class="headerlink" title="2.6.2 可读性"></a>2.6.2 可读性</h4><p>算法的可读性: 算法设计的另一目的是为了便于阅读,理解和交流</p>
+<blockquote>
+<p>不能追求一味地代码量少等</p>
+</blockquote>
+<h4 id="2-6-3-健壮性"><a href="#2-6-3-健壮性" class="headerlink" title="2.6.3 健壮性"></a>2.6.3 健壮性</h4><p>算法的健壮性: 当输入数据不合法时,算法也能做出相关处理,而不是产生异常或莫名其妙的结果</p>
+<h4 id="2-6-4-时间效率高和存储量低"><a href="#2-6-4-时间效率高和存储量低" class="headerlink" title="2.6.4 时间效率高和存储量低"></a>2.6.4 时间效率高和存储量低</h4><p>算法的时间效率高和存储量低: 设计算法应该尽量满足时间效率高和存储量低的需求</p>
+<blockquote>
+<p>人都希望花最少的钱干最大的事</p>
+</blockquote>
+<h3 id="2-7-算法效率的度量方法"><a href="#2-7-算法效率的度量方法" class="headerlink" title="2.7 算法效率的度量方法"></a>2.7 算法效率的度量方法</h3><p>事前分析好于事后统计</p>
+<h4 id="2-7-1-事后统计方法"><a href="#2-7-1-事后统计方法" class="headerlink" title="2.7.1 事后统计方法"></a>2.7.1 事后统计方法</h4><p>利用计算机计时器对不同算法的程序的运行时间进行比较,从而确定算法效率的高低</p>
+<p>缺点:</p>
+<ol>
+<li>很可能写了很久发现是垃圾算法</li>
+<li>时间比较依赖计算机的运行速度</li>
+<li>效率高的算法在小的测试数据面前无法体现明显差异</li>
+</ol>
+<h4 id="2-7-2-事前分析估算方法"><a href="#2-7-2-事前分析估算方法" class="headerlink" title="2.7.2 事前分析估算方法"></a>2.7.2 事前分析估算方法</h4><p>在计算机程序编制前,依据统计方法对算法进行估算</p>
+<p>测定运行时间最可靠的方法, 就是计算对运行时间有消耗的基本操作的执行次数. 运行时间与这个技术成正比</p>
+<p>不关心编程语言以及运行的计算机,只关心算法的话, 就不计算循环索引递增,循环终止条件,变量声明,打印结果等操作. 最终,在<strong>分析程序的运行时间时,最重要的是把程序看成是独立于程序设计语言的算法或一系列步骤</strong></p>
+<p>分析一个算法运行时间时,重要的是把基本操作的数量与输入规模关联起来,即基本操作的数量必须表示成输入规模的函数</p>
+<p>输入规模为 n,随着 n 越来越大,不同算法在时间效率上的差异也就越来越大</p>
+<h3 id="2-8-函数的渐进增长"><a href="#2-8-函数的渐进增长" class="headerlink" title="2.8 函数的渐进增长"></a>2.8 函数的渐进增长</h3><p>比如两个算法, 2n+3 和 3n+1,哪个更快?</p>
+<p>明显只有 n=1 时第二个才更优,所以我们说整体上第一个要好过第二个</p>
+<p><strong>函数的渐进增长: 给定两个函数 f(n)和 g(n),如果存在一个整数 N,使得对于所有的 n&gt;N,f(n)总是比 g(n)大,那么我们说 f(n)的增长渐进快于 g(n)</strong></p>
+<p>而且随着 n 的增大, +3 和+1 不影响算法变化,所以我们忽略<strong>这些加法常数</strong>.</p>
+<p>我们再观察发现,去掉与 n 相乘的常数,结果也没有改变,所以<strong>与最高次项相乘的常数并不重要</strong>,可以将 2n²=&gt;n²</p>
+<p>2n²和 2n²+3n+1 比较时,发现随着 n 值越来越大,两者非常趋近</p>
+<p>最终我们得出结论:</p>
+<p><strong>判断一个算法的效率时,函数中的常数和其他次要项常常可以忽略,而更应该关注主项(最高次项)的阶数</strong></p>
+<p>事前估算方法的理论依据: 某个算法,随着 n 的增大,它会越来越优于某个算法,或者越来越差于某个算法.所以我们通过算法时间复杂度来估算算法时间效率</p>
+<h3 id="2-9-算法时间复杂度"><a href="#2-9-算法时间复杂度" class="headerlink" title="2.9 算法时间复杂度"></a>2.9 算法时间复杂度</h3><h4 id="2-9-1-算法时间复杂度"><a href="#2-9-1-算法时间复杂度" class="headerlink" title="2.9.1 算法时间复杂度"></a>2.9.1 算法时间复杂度</h4><p>在进行算法分析时,语句总的执行次数 T(n)是关于问题规模 n 的函数,进而分析 T(n)随 n 的变化情况并确定 T(n)的数量级.算法的时间复杂度,也就是算法的时间量度,记作:</p>
+<p> <code>T(n) = O(f(n))</code></p>
+<p>它表示随问题规模 n 的增大,算法执行时间的增长率和 f(n)的增长率相同,称作算法的渐进时间复杂度,简称为时间复杂度.</p>
+<p>其中 f(n)是问题规模 n 的某个函数</p>
+<p>这是大 O()记法</p>
+<p>一般情况下,随着 n 的增大, T(n)增长最慢的算法为最优算法</p>
+<p>2.8 中的例子,可以是 O(n),O(1),O(n²)</p>
+<blockquote>
+<p>n 是输入规模</p>
+</blockquote>
+<h4 id="2-9-2-推导大-O-阶方法"><a href="#2-9-2-推导大-O-阶方法" class="headerlink" title="2.9.2 推导大 O 阶方法"></a>2.9.2 推导大 O 阶方法</h4><p>步骤:</p>
+<ol>
+<li>用常数 1 取代运行时间中的所有加法常数</li>
+<li>在修改后的运行次数中,只保留最高阶项</li>
+<li>如果最高阶项存在且不是 1,则取出与这个项相乘的常数</li>
+</ol>
+<p>得到的结果就是大 O 阶</p>
+<h4 id="2-9-3-常数阶"><a href="#2-9-3-常数阶" class="headerlink" title="2.9.3 常数阶"></a>2.9.3 常数阶</h4><p>O(1)</p>
+<p><code>sum = (1+n)*n/2</code> 这个有 1 句和10 句,都是 O(1)</p>
+<p>因为无论 n 为多少,上段只是之星 1 次和 10 次的差异,这种与问题的大小(也就是n)无关,执行时间恒定,所以 O(1)的时间复杂度,又叫常数阶</p>
+<h4 id="2-9-4-线性阶"><a href="#2-9-4-线性阶" class="headerlink" title="2.9.4 线性阶"></a>2.9.4 线性阶</h4><p>要确定某个算法的阶次,常常要确定某个特定语句或整个语句集运行的次数.</p>
+<p><strong>分析算法的复杂度,关键要分析循环结构的运行情况</strong></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> i;</span><br><span class="line"><span class="keyword">for</span>(i=<span class="number">0</span>;i&lt;n;i++)</span><br><span class="line">&#123;</span><br><span class="line">  <span class="comment">/* 时间复杂度为O(1)的程序步骤序列*/</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>因为循环体中的代码需要执行 n 次,所以时间复杂度为 O(n)</p>
+<h4 id="2-9-5-对数阶"><a href="#2-9-5-对数阶" class="headerlink" title="2.9.5 对数阶"></a>2.9.5 对数阶</h4><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> count = <span class="number">1</span>;</span><br><span class="line"><span class="keyword">while</span>(count&lt;n)</span><br><span class="line">&#123;</span><br><span class="line">  count = count * <span class="number">2</span>;</span><br><span class="line">  <span class="comment">/* 时间复杂度为O(1)的程序步骤序列*/</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>因为每次 count*2后, 距离 n 更近了.也就是说, 有多少个 2相乘后大于 n,则会退出循环. 2的 x 次方=n得到 x=log以 2 为底,n 为真数</p>
+<p>所以这个循环的时间复杂度为 O(logn)</p>
+<p>2.9.6 平方阶</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> i,j;</span><br><span class="line"><span class="keyword">for</span>(i=<span class="number">0</span>;i&lt;n;i++)</span><br><span class="line">&#123;</span><br><span class="line">  <span class="keyword">for</span>(j=<span class="number">0</span>;j&lt;n;j++)</span><br><span class="line">  &#123;</span><br><span class="line">    <span class="comment">/* 时间复杂度为O(1)的程序步骤序列*/</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>O(n)再循环 n 次,所以为 O(n²)</p>
+<p>如果内循环的循环次数改为 m,则为 O(m✖️n)</p>
+<p><strong>循环的时间复杂度等于循环体的复杂度乘以改循环运行的次数</strong></p>
+<p>理解大 O 推导并不难,难的是对数列的一些相关运算,这里更多的是数学知识和能力.</p>
+<h3 id="2-10-常见的时间复杂度"><a href="#2-10-常见的时间复杂度" class="headerlink" title="2.10 常见的时间复杂度"></a>2.10 常见的时间复杂度</h3><p>O(1)</p>
+<p>O(log n)</p>
+<p>O(n)</p>
+<p>O(nlog n)</p>
+<p>O(n²)</p>
+<p>其他比如 O(n³)一般不去讨论</p>
+<h3 id="2-11-最坏情况与平均情况"><a href="#2-11-最坏情况与平均情况" class="headerlink" title="2.11 最坏情况与平均情况"></a>2.11 最坏情况与平均情况</h3><p>查找 n 个随机数字数组中的数字,可能第一个数字就是(O(1)),也可能是最后一个(O(n))</p>
+<p>最坏情况运行时间是一种保证,就是运行时间不会再坏了.这是最重要的需求</p>
+<p>平均运行时间在上例中是n/2, 平均运行时间是最有意义的,因为是期望的运行时间.</p>
+<p>对算法的分析,一种为平均时间复杂度,一种是最坏时间复杂度</p>
+<p>一般没有特殊说明,都是最坏时间复杂度</p>
+<h3 id="2-12-算法空间复杂度"><a href="#2-12-算法空间复杂度" class="headerlink" title="2.12 算法空间复杂度"></a>2.12 算法空间复杂度</h3><p>算法的空间复杂度通过计算算法所需的存储空间实现,算法空间复杂度的计算公式记作:</p>
+<p><code>S(n) = O(f(n))</code></p>
+<p>n 为问题的规模,f(n)为语句关于 n 所占存储空间的函数</p>
+<h3 id="2-14-结语"><a href="#2-14-结语" class="headerlink" title="2.14 结语"></a>2.14 结语</h3><p>一台老 CPU 计算机运行 O(n)比一台速度提高100 倍的新 CPU 运行 O(n²)的程序,效率高的是老 CPU,所以说,原因就在于算法的优劣直接决定了程序运行的效率.</p>
+
+      
+    </div>
+    <div class="article-footer">
+      <blockquote class="mt-2x">
+  <ul class="post-copyright list-unstyled">
+    
+    <li class="post-copyright-link hidden-xs">
+      <strong>本文链接：</strong>
+      <a href="http://yiiiqing.github.io/2021/06/21/%E3%80%8A%E5%A4%A7%E8%AF%9D%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E3%80%8B%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0/" title="《大话数据结构》阅读笔记" target="_blank" rel="external">http://yiiiqing.github.io/2021/06/21/%E3%80%8A%E5%A4%A7%E8%AF%9D%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E3%80%8B%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0/</a>
+    </li>
+    
+    <li class="post-copyright-license">
+      <strong>版权声明： </strong> 本博客所有文章除特别声明外，均采用 <a href="http://creativecommons.org/licenses/by/4.0/deed.zh" target="_blank" rel="external">CC BY 4.0 CN协议</a> 许可协议。转载请注明出处！
+    </li>
+  </ul>
+</blockquote>
+
+
+<div class="panel panel-default panel-badger">
+  <div class="panel-body">
+    <figure class="media">
+      <div class="media-left">
+        <a href="https://github.com/yiiiqing" target="_blank" class="img-burn thumb-sm visible-lg">
+          <img src="/images/avatar.jpg" class="img-rounded w-full" alt="">
+        </a>
+      </div>
+      <div class="media-body">
+        <h3 class="media-heading"><a href="https://github.com/yiiiqing" target="_blank"><span class="text-dark">Yiqing</span><small class="ml-1x">Web Developer</small></a></h3>
+        <div>一位打工人</div>
+      </div>
+    </figure>
+  </div>
+</div>
+
+
+    </div>
+  </article>
+  
+    
+  <section id="comments">
+  	
+      <div id="lv-container" data-id="city" data-uid="MTAyMC81MTg5OS8yODM4MA==">
+        <noscript> 为正常使用来必力评论功能请激活JavaScript</noscript>
+      </div>    
+    
+  </section>
+
+
+  
+</div>
+
+  <nav class="bar bar-footer clearfix" data-stick-bottom>
+  <div class="bar-inner">
+  
+  <ul class="pager pull-left">
+    
+    <li class="prev">
+      <a href="/2021/06/22/Guice/" title="Guice"><i class="icon icon-angle-left" aria-hidden="true"></i><span>&nbsp;&nbsp;上一篇</span></a>
+    </li>
+    
+    
+    <li class="next">
+      <a href="/2021/06/20/%E8%BF%87%E6%BB%A4%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E4%B8%AD-%E5%BC%80%E5%A4%B4%E7%9A%84%E6%B3%A8%E9%87%8A/" title="过滤配置文件中#开头的注释"><span>下一篇&nbsp;&nbsp;</span><i class="icon icon-angle-right" aria-hidden="true"></i></a>
+    </li>
+    
+    
+  </ul>
+  
+  
+  <!-- Button trigger modal -->
+  <button type="button" class="btn btn-fancy btn-donate pop-onhover bg-gradient-warning" data-toggle="modal" data-target="#donateModal"><span>赏</span></button>
+  <!-- <div class="wave-icon wave-icon-danger btn-donate" data-toggle="modal" data-target="#donateModal">
+    <div class="wave-circle"><span class="icon"><i class="icon icon-bill"></i></span></div>
+  </div> -->
+  
+  
+  <div class="bar-right">
+    
+    <div class="share-component" data-sites="weibo,qq,wechat,facebook,twitter" data-mobile-sites="weibo,qq,qzone"></div>
+    
+  </div>
+  </div>
+</nav>
+  
+<!-- Modal -->
+<div class="modal modal-center modal-small modal-xs-full fade" id="donateModal" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content donate">
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+      <div class="modal-body">
+        <div class="donate-box">
+          <div class="donate-head">
+            <p>感谢您的支持，我会继续努力的!</p>
+          </div>
+          <div class="tab-content">
+            <div role="tabpanel" class="tab-pane fade active in" id="alipay">
+              <div class="donate-payimg">
+                <img src="/images/donate/alipayimg.png" alt="扫码支持" title="扫一扫" />
+              </div>
+              <p class="text-muted mv">扫码打赏，你说多少就多少</p>
+              <p class="text-grey">打开支付宝扫一扫，即可进行扫码打赏哦</p>
+            </div>
+            <div role="tabpanel" class="tab-pane fade" id="wechatpay">
+              <div class="donate-payimg">
+                <img src="/images/donate/wechatpayimg.png" alt="扫码支持" title="扫一扫" />
+              </div>
+              <p class="text-muted mv">扫码打赏，你说多少就多少</p>
+              <p class="text-grey">打开微信扫一扫，即可进行扫码打赏哦</p>
+            </div>
+          </div>
+          <div class="donate-footer">
+            <ul class="nav nav-tabs nav-justified" role="tablist">
+              <li role="presentation" class="active">
+                <a href="#alipay" id="alipay-tab" role="tab" data-toggle="tab" aria-controls="alipay" aria-expanded="true"><i class="icon icon-alipay"></i> 支付宝</a>
+              </li>
+              <li role="presentation" class="">
+                <a href="#wechatpay" role="tab" id="wechatpay-tab" data-toggle="tab" aria-controls="wechatpay" aria-expanded="false"><i class="icon icon-wepay"></i> 微信支付</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+</main>
+
+  <footer class="footer" itemscope itemtype="http://schema.org/WPFooter">
+	
+	
+    <ul class="social-links">
+    	
+        <li><a href="https://github.com/yiiiqing" target="_blank" title="Github" data-toggle=tooltip data-placement=top><i class="icon icon-github"></i></a></li>
+        
+        <li><a href="https://weibo.com/6370670336/profile?topnav=1&wvr=6&is_all=1" target="_blank" title="Weibo" data-toggle=tooltip data-placement=top><i class="icon icon-weibo"></i></a></li>
+        
+    </ul>
+
+    <div class="copyright">
+    	
+        <div class="publishby">
+        	Theme by <a href="https://github.com/cofess" target="_blank"> cofess </a>base on <a href="https://github.com/cofess/hexo-theme-pure" target="_blank">pure</a>.
+        </div>
+    </div>
+</footer>
+  <script src="//cdn.jsdelivr.net/npm/jquery@1.12.4/dist/jquery.min.js"></script>
+<script>
+window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')
+</script>
+
+<script src="/js/plugin.min.js"></script>
+
+
+<script src="/js/application.js"></script>
+
+
+    <script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: '文章',
+            PAGES: '页面',
+            CATEGORIES: '分类',
+            TAGS: '标签',
+            UNTITLED: '(未命名)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+
+<script src="/js/insight.js"></script>
+
+
+
+
+
+
+   
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+   
+    
+<script defer type="text/javascript">
+  (function(d, s) {
+    var j, e = d.getElementsByTagName(s)[0];
+
+    if (typeof LivereTower === 'function') { return; }
+
+    j = d.createElement(s);
+    j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+    j.async = true;
+
+    e.parentNode.insertBefore(j, e);
+  })(document, 'script');
+</script>
+
+
+
+
+
+
+
+
+</body>
+</html>
