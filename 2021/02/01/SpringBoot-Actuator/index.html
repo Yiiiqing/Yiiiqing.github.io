@@ -1,0 +1,832 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head>
+  <meta charset="utf-8">
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="Cache-Control" content="no-transform" />
+  <meta http-equiv="Cache-Control" content="no-siteapp" />
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="format-detection" content="telephone=no,email=no,adress=no">
+  <!-- Color theme for statusbar -->
+  <meta name="theme-color" content="#000000" />
+  <!-- 强制页面在当前窗口以独立页面显示,防止别人在框架里调用页面 -->
+  <meta http-equiv="window-target" content="_top" />
+  
+  
+  <title>SpringBoot-Actuator | 仙人一张</title>
+  <meta name="description" content="SpringBoot Actuator简介Actuator是SpringBoot抽取出来的指标监控模块 使用步骤 引入场景 1234&lt;dependency&gt;  &lt;groupId&gt;org.springframework.boot&lt;&#x2F;groupId&gt;  &lt;artifactId&gt;spring-boot-starter-actuator&lt;&#x2F;artifa">
+<meta property="og:type" content="article">
+<meta property="og:title" content="SpringBoot-Actuator">
+<meta property="og:url" content="http://yiiiqing.github.io/2021/02/01/SpringBoot-Actuator/index.html">
+<meta property="og:site_name" content="仙人一张">
+<meta property="og:description" content="SpringBoot Actuator简介Actuator是SpringBoot抽取出来的指标监控模块 使用步骤 引入场景 1234&lt;dependency&gt;  &lt;groupId&gt;org.springframework.boot&lt;&#x2F;groupId&gt;  &lt;artifactId&gt;spring-boot-starter-actuator&lt;&#x2F;artifa">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://yiiiqing.github.io/2021/02/01/SpringBoot-Actuator/image-20210201151704132.png">
+<meta property="og:image" content="http://yiiiqing.github.io/2021/02/01/SpringBoot-Actuator/image-20210201152145345.png">
+<meta property="og:image" content="http://yiiiqing.github.io/2021/02/01/SpringBoot-Actuator/image-20210201155109689.png">
+<meta property="og:image" content="http://yiiiqing.github.io/2021/02/01/SpringBoot-Actuator/image-20210201160950299.png">
+<meta property="og:image" content="http://yiiiqing.github.io/2021/02/01/SpringBoot-Actuator/image-20210201163720363.png">
+<meta property="og:image" content="http://yiiiqing.github.io/2021/02/01/SpringBoot-Actuator/image-20210201163824913.png">
+<meta property="article:published_time" content="2021-02-01T06:42:34.000Z">
+<meta property="article:modified_time" content="2021-02-01T08:38:36.000Z">
+<meta property="article:author" content="yiqing">
+<meta property="article:tag" content="SpringBoot">
+<meta property="article:tag" content="Actuator">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://yiiiqing.github.io/2021/02/01/SpringBoot-Actuator/image-20210201151704132.png">
+  <!-- Canonical links -->
+  <link rel="canonical" href="http://yiiiqing.github.io/2021/02/01/SpringBoot-Actuator/index.html">
+  
+    <link rel="alternate" href="/atom.xml" title="仙人一张" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png" type="image/x-icon">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+  
+  
+  
+<meta name="generator" content="Hexo 5.4.2"></head>
+
+
+<body class="main-center theme-black" itemscope itemtype="http://schema.org/WebPage">
+  <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+  <div class="slimContent">
+    <div class="navbar-header">
+      
+      
+      <div class="profile-block text-center">
+        <a id="avatar" href="https://github.com/yiiiqing" target="_blank">
+          <img class="img-circle img-rotate" src="/images/avatar.jpg" width="200" height="200">
+        </a>
+        <h2 id="name" class="hidden-xs hidden-sm">Yiqing</h2>
+        <h3 id="title" class="hidden-xs hidden-sm hidden-md">Web Developer</h3>
+        <small id="location" class="text-muted hidden-xs hidden-sm"><i class="icon icon-map-marker"></i> Shanghai, China</small>
+      </div>
+      
+      <div class="search" id="search-form-wrap">
+
+    <form class="search-form sidebar-form">
+        <div class="input-group">
+            <input type="text" class="search-form-input form-control" placeholder="搜索" />
+            <span class="input-group-btn">
+                <button type="submit" class="search-form-submit btn btn-flat" onclick="return false;"><i class="icon icon-search"></i></button>
+            </span>
+        </div>
+    </form>
+    <div class="ins-search">
+  <div class="ins-search-mask"></div>
+  <div class="ins-search-container">
+    <div class="ins-input-wrapper">
+      <input type="text" class="ins-search-input" placeholder="想要查找什么..." x-webkit-speech />
+      <button type="button" class="close ins-close ins-selectable" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+    </div>
+    <div class="ins-section-wrapper">
+      <div class="ins-section-container"></div>
+    </div>
+  </div>
+</div>
+
+
+</div>
+      <button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target="#main-navbar" aria-controls="main-navbar" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+    </div>
+    <nav id="main-navbar" class="collapse navbar-collapse" itemscope itemtype="http://schema.org/SiteNavigationElement" role="navigation">
+      <ul class="nav navbar-nav main-nav ">
+        
+        
+        <li class="menu-item menu-item-home">
+          <a href="/.">
+            
+            <i class="icon icon-home-fill"></i>
+            
+            <span class="menu-title">首页</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives">
+            
+            <i class="icon icon-archives-fill"></i>
+            
+            <span class="menu-title">归档</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories">
+            
+            <i class="icon icon-folder"></i>
+            
+            <span class="menu-title">分类</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags">
+            
+            <i class="icon icon-tags"></i>
+            
+            <span class="menu-title">标签</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-repository">
+          <a href="/repository">
+            
+            <i class="icon icon-project"></i>
+            
+            <span class="menu-title">项目</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-links">
+          <a href="/links">
+            
+            <i class="icon icon-friendship"></i>
+            
+            <span class="menu-title">友链</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about">
+            
+            <i class="icon icon-cup-fill"></i>
+            
+            <span class="menu-title">关于</span>
+          </a>
+        </li>
+        
+      </ul>
+      
+	
+    <ul class="social-links">
+    	
+        <li><a href="https://github.com/yiiiqing" target="_blank" title="Github" data-toggle=tooltip data-placement=top><i class="icon icon-github"></i></a></li>
+        
+        <li><a href="https://weibo.com/6370670336/profile?topnav=1&wvr=6&is_all=1" target="_blank" title="Weibo" data-toggle=tooltip data-placement=top><i class="icon icon-weibo"></i></a></li>
+        
+    </ul>
+
+    </nav>
+  </div>
+</header>
+
+  
+    <aside class="sidebar" itemscope itemtype="http://schema.org/WPSideBar">
+  <div class="slimContent">
+    
+      <div class="widget">
+    <h3 class="widget-title">公告</h3>
+    <div class="widget-body">
+        <div id="board">
+            <div class="content">
+                <p>欢迎交流与分享经验! WechatID - user-yiqing</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">分类</h3>
+    <div class="widget-body">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/DB/">DB</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Design/">Design</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Docker/">Docker</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Java/">Java</a><span class="category-list-count">54</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Java/Redis/">Redis</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Java/%E4%B8%AD%E9%97%B4%E4%BB%B6/">中间件</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/JavaScript/">JavaScript</a><span class="category-list-count">10</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Kafka/">Kafka</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a><span class="category-list-count">10</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Markdown/">Markdown</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/MySQL/">MySQL</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Node-js/">Node.js</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Redis/">Redis</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Web/">Web</a><span class="category-list-count">13</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E4%B8%AD%E9%97%B4%E4%BB%B6/">中间件</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%AC%94%E8%AE%B0/">笔记</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%AE%97%E6%B3%95/">算法</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%BD%91%E7%BB%9C/">网络</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/">设计模式</a><span class="category-list-count">2</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget-body">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/ACID/" rel="tag">ACID</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Actuator/" rel="tag">Actuator</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Ajax/" rel="tag">Ajax</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Ant/" rel="tag">Ant</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Bootstrap/" rel="tag">Bootstrap</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CAP/" rel="tag">CAP</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CDN/" rel="tag">CDN</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CROS/" rel="tag">CROS</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CentOS/" rel="tag">CentOS</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/DI/" rel="tag">DI</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Database/" rel="tag">Database</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Devtools/" rel="tag">Devtools</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Docker/" rel="tag">Docker</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Druid/" rel="tag">Druid</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Error/" rel="tag">Error</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Express/" rel="tag">Express</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Guice/" rel="tag">Guice</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Interceptor/" rel="tag">Interceptor</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/IoC/" rel="tag">IoC</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Isolation/" rel="tag">Isolation</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/" rel="tag">Java</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java8/" rel="tag">Java8</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JavaScript/" rel="tag">JavaScript</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Kafka/" rel="tag">Kafka</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/" rel="tag">Linux</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Markdown/" rel="tag">Markdown</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Maven/" rel="tag">Maven</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MySQL/" rel="tag">MySQL</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Mybatis/" rel="tag">Mybatis</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Mysql/" rel="tag">Mysql</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Nginx/" rel="tag">Nginx</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Node-js/" rel="tag">Node.js</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ORM/" rel="tag">ORM</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/RPC/" rel="tag">RPC</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/RabbitMQ/" rel="tag">RabbitMQ</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Redis/" rel="tag">Redis</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/RestFul/" rel="tag">RestFul</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Sequelize/" rel="tag">Sequelize</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Shell/" rel="tag">Shell</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spring/" rel="tag">Spring</a><span class="tag-list-count">16</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SpringBoot/" rel="tag">SpringBoot</a><span class="tag-list-count">23</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SpringCloud/" rel="tag">SpringCloud</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SpringMVC/" rel="tag">SpringMVC</a><span class="tag-list-count">8</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/String/" rel="tag">String</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Swagger/" rel="tag">Swagger</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Thread/" rel="tag">Thread</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Thymeleaf/" rel="tag">Thymeleaf</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Tomcat/" rel="tag">Tomcat</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/TypeScript/" rel="tag">TypeScript</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Validation/" rel="tag">Validation</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/WEB/" rel="tag">WEB</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Zookeeper/" rel="tag">Zookeeper</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/async/" rel="tag">async</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/base64/" rel="tag">base64</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/bash/" rel="tag">bash</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/bug/" rel="tag">bug</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/byte/" rel="tag">byte[]</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cron/" rel="tag">cron</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/curl/" rel="tag">curl</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/download/" rel="tag">download</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/express/" rel="tag">express</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/file/" rel="tag">file</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/gRPC/" rel="tag">gRPC</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/" rel="tag">git</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/heartbeat/" rel="tag">heartbeat</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/http/" rel="tag">http</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/idea/" rel="tag">idea</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/import/" rel="tag">import</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/jOOQ/" rel="tag">jOOQ</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/jdbc/" rel="tag">jdbc</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/koa/" rel="tag">koa</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/maven/" rel="tag">maven</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/npm/" rel="tag">npm</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pm2/" rel="tag">pm2</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/schedule/" rel="tag">schedule</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tcp/" rel="tag">tcp</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/upload/" rel="tag">upload</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/utils/" rel="tag">utils</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vi/" rel="tag">vi</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/websocket/" rel="tag">websocket</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/yaml/" rel="tag">yaml</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F/" rel="tag">单例模式</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AD%97%E7%AC%A6%E4%B8%B2/" rel="tag">字符串</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%8A%A5%E9%94%99/" rel="tag">报错</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%8E%92%E5%BA%8F/" rel="tag">排序</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" rel="tag">数据结构</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%A0%B7%E5%BC%8F/" rel="tag">样式</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/" rel="tag">计算机组成原理</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%85%8D%E7%BD%AE/" rel="tag">配置</a><span class="tag-list-count">17</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%85%8D%E7%BD%AE-Java/" rel="tag">配置 - Java</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%95%9C%E5%83%8F%E6%BA%90/" rel="tag">镜像源</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%A1%B9%E7%9B%AE/" rel="tag">项目</a><span class="tag-list-count">2</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget-body tagcloud">
+      <a href="/tags/ACID/" style="font-size: 13px;">ACID</a> <a href="/tags/Actuator/" style="font-size: 13px;">Actuator</a> <a href="/tags/Ajax/" style="font-size: 13px;">Ajax</a> <a href="/tags/Ant/" style="font-size: 13px;">Ant</a> <a href="/tags/Bootstrap/" style="font-size: 13px;">Bootstrap</a> <a href="/tags/CAP/" style="font-size: 13px;">CAP</a> <a href="/tags/CDN/" style="font-size: 13px;">CDN</a> <a href="/tags/CROS/" style="font-size: 13px;">CROS</a> <a href="/tags/CentOS/" style="font-size: 13px;">CentOS</a> <a href="/tags/DI/" style="font-size: 13.11px;">DI</a> <a href="/tags/Database/" style="font-size: 13px;">Database</a> <a href="/tags/Devtools/" style="font-size: 13px;">Devtools</a> <a href="/tags/Docker/" style="font-size: 13.33px;">Docker</a> <a href="/tags/Druid/" style="font-size: 13px;">Druid</a> <a href="/tags/Error/" style="font-size: 13.11px;">Error</a> <a href="/tags/Express/" style="font-size: 13px;">Express</a> <a href="/tags/Guice/" style="font-size: 13px;">Guice</a> <a href="/tags/Interceptor/" style="font-size: 13.11px;">Interceptor</a> <a href="/tags/IoC/" style="font-size: 13.11px;">IoC</a> <a href="/tags/Isolation/" style="font-size: 13px;">Isolation</a> <a href="/tags/Java/" style="font-size: 13.22px;">Java</a> <a href="/tags/Java8/" style="font-size: 13px;">Java8</a> <a href="/tags/JavaScript/" style="font-size: 13.44px;">JavaScript</a> <a href="/tags/Kafka/" style="font-size: 13px;">Kafka</a> <a href="/tags/Linux/" style="font-size: 13.22px;">Linux</a> <a href="/tags/Markdown/" style="font-size: 13px;">Markdown</a> <a href="/tags/Maven/" style="font-size: 13px;">Maven</a> <a href="/tags/MySQL/" style="font-size: 13.56px;">MySQL</a> <a href="/tags/Mybatis/" style="font-size: 13.44px;">Mybatis</a> <a href="/tags/Mysql/" style="font-size: 13px;">Mysql</a> <a href="/tags/Nginx/" style="font-size: 13px;">Nginx</a> <a href="/tags/Node-js/" style="font-size: 13.44px;">Node.js</a> <a href="/tags/ORM/" style="font-size: 13.11px;">ORM</a> <a href="/tags/RPC/" style="font-size: 13px;">RPC</a> <a href="/tags/RabbitMQ/" style="font-size: 13px;">RabbitMQ</a> <a href="/tags/Redis/" style="font-size: 13.11px;">Redis</a> <a href="/tags/RestFul/" style="font-size: 13.11px;">RestFul</a> <a href="/tags/Sequelize/" style="font-size: 13.22px;">Sequelize</a> <a href="/tags/Shell/" style="font-size: 13.11px;">Shell</a> <a href="/tags/Spring/" style="font-size: 13.78px;">Spring</a> <a href="/tags/SpringBoot/" style="font-size: 14px;">SpringBoot</a> <a href="/tags/SpringCloud/" style="font-size: 13px;">SpringCloud</a> <a href="/tags/SpringMVC/" style="font-size: 13.67px;">SpringMVC</a> <a href="/tags/String/" style="font-size: 13.11px;">String</a> <a href="/tags/Swagger/" style="font-size: 13.11px;">Swagger</a> <a href="/tags/Thread/" style="font-size: 13px;">Thread</a> <a href="/tags/Thymeleaf/" style="font-size: 13px;">Thymeleaf</a> <a href="/tags/Tomcat/" style="font-size: 13px;">Tomcat</a> <a href="/tags/TypeScript/" style="font-size: 13px;">TypeScript</a> <a href="/tags/Validation/" style="font-size: 13px;">Validation</a> <a href="/tags/WEB/" style="font-size: 13px;">WEB</a> <a href="/tags/Zookeeper/" style="font-size: 13px;">Zookeeper</a> <a href="/tags/async/" style="font-size: 13px;">async</a> <a href="/tags/base64/" style="font-size: 13px;">base64</a> <a href="/tags/bash/" style="font-size: 13px;">bash</a> <a href="/tags/bug/" style="font-size: 13px;">bug</a> <a href="/tags/byte/" style="font-size: 13px;">byte[]</a> <a href="/tags/cron/" style="font-size: 13px;">cron</a> <a href="/tags/curl/" style="font-size: 13px;">curl</a> <a href="/tags/download/" style="font-size: 13.11px;">download</a> <a href="/tags/express/" style="font-size: 13.11px;">express</a> <a href="/tags/file/" style="font-size: 13.11px;">file</a> <a href="/tags/gRPC/" style="font-size: 13px;">gRPC</a> <a href="/tags/git/" style="font-size: 13px;">git</a> <a href="/tags/heartbeat/" style="font-size: 13px;">heartbeat</a> <a href="/tags/http/" style="font-size: 13px;">http</a> <a href="/tags/idea/" style="font-size: 13px;">idea</a> <a href="/tags/import/" style="font-size: 13px;">import</a> <a href="/tags/jOOQ/" style="font-size: 13px;">jOOQ</a> <a href="/tags/jdbc/" style="font-size: 13px;">jdbc</a> <a href="/tags/koa/" style="font-size: 13.22px;">koa</a> <a href="/tags/maven/" style="font-size: 13.11px;">maven</a> <a href="/tags/npm/" style="font-size: 13.11px;">npm</a> <a href="/tags/pm2/" style="font-size: 13px;">pm2</a> <a href="/tags/schedule/" style="font-size: 13px;">schedule</a> <a href="/tags/tcp/" style="font-size: 13px;">tcp</a> <a href="/tags/upload/" style="font-size: 13.11px;">upload</a> <a href="/tags/utils/" style="font-size: 13px;">utils</a> <a href="/tags/vi/" style="font-size: 13px;">vi</a> <a href="/tags/websocket/" style="font-size: 13px;">websocket</a> <a href="/tags/yaml/" style="font-size: 13px;">yaml</a> <a href="/tags/%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F/" style="font-size: 13.11px;">单例模式</a> <a href="/tags/%E5%AD%97%E7%AC%A6%E4%B8%B2/" style="font-size: 13.11px;">字符串</a> <a href="/tags/%E6%8A%A5%E9%94%99/" style="font-size: 13px;">报错</a> <a href="/tags/%E6%8E%92%E5%BA%8F/" style="font-size: 13.11px;">排序</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" style="font-size: 13px;">数据结构</a> <a href="/tags/%E6%A0%B7%E5%BC%8F/" style="font-size: 13px;">样式</a> <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/" style="font-size: 13px;">计算机组成原理</a> <a href="/tags/%E9%85%8D%E7%BD%AE/" style="font-size: 13.89px;">配置</a> <a href="/tags/%E9%85%8D%E7%BD%AE-Java/" style="font-size: 13px;">配置 - Java</a> <a href="/tags/%E9%95%9C%E5%83%8F%E6%BA%90/" style="font-size: 13px;">镜像源</a> <a href="/tags/%E9%A1%B9%E7%9B%AE/" style="font-size: 13.11px;">项目</a>
+    </div>
+  </div>
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget-body">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/04/">四月 2023</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/03/">三月 2023</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/01/">一月 2023</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/07/">七月 2022</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/11/">十一月 2021</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/10/">十月 2021</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/09/">九月 2021</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/08/">八月 2021</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/07/">七月 2021</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/06/">六月 2021</a><span class="archive-list-count">8</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/05/">五月 2021</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/04/">四月 2021</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/03/">三月 2021</a><span class="archive-list-count">16</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/02/">二月 2021</a><span class="archive-list-count">8</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/01/">一月 2021</a><span class="archive-list-count">9</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/12/">十二月 2020</a><span class="archive-list-count">23</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/11/">十一月 2020</a><span class="archive-list-count">31</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget-body">
+      <ul class="recent-post-list list-unstyled no-thumbnail">
+        
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/Java/">Java</a>
+              </p>
+              <p class="item-title">
+                <a href="/2023/04/13/Spring-BeanFactory%E5%92%8CFactoryBean%E7%9A%84%E5%8C%BA%E5%88%AB/" class="title">Spring-BeanFactory和FactoryBean的区别</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2023-04-13T09:35:43.000Z" itemprop="datePublished">2023-04-13</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/Java/">Java</a>
+              </p>
+              <p class="item-title">
+                <a href="/2023/04/13/Spring-Bean%E7%9A%84%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F/" class="title">Spring-Bean的生命周期</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2023-04-13T09:22:34.000Z" itemprop="datePublished">2023-04-13</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/Java/">Java</a>
+              </p>
+              <p class="item-title">
+                <a href="/2023/03/21/Spring%E5%AE%B9%E5%99%A8%E7%9A%84refresh%E6%96%B9%E6%B3%95/" class="title">Spring容器的refresh方法</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2023-03-21T08:40:55.000Z" itemprop="datePublished">2023-03-21</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/Java/">Java</a>
+              </p>
+              <p class="item-title">
+                <a href="/2023/01/12/JavaWeb%E7%9F%A5%E8%AF%86%E7%82%B9/" class="title">JavaWeb知识点</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2023-01-12T07:05:09.000Z" itemprop="datePublished">2023-01-12</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/Kafka/">Kafka</a>
+              </p>
+              <p class="item-title">
+                <a href="/2022/07/15/kafka%E6%B6%88%E6%81%AF%E8%BD%AC%E6%9C%AC%E5%9C%B0%E9%98%9F%E5%88%97%E5%A4%9A%E7%BA%BF%E7%A8%8B%E6%B6%88%E8%B4%B9%E4%B8%8B%E5%8F%91%E7%8E%B0%E7%9A%84%E9%97%AE%E9%A2%98/" class="title">kafka消息转本地队列多线程消费下发现的问题</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2022-07-15T05:00:05.000Z" itemprop="datePublished">2022-07-15</time>
+              </p>
+            </div>
+          </li>
+          
+      </ul>
+    </div>
+  </div>
+  
+
+    
+  </div>
+</aside>
+
+  
+  
+<main class="main" role="main">
+  <div class="content">
+  <article id="post-SpringBoot-Actuator" class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
+    
+    <div class="article-header">
+      
+        
+  
+    <h1 class="article-title" itemprop="name">
+      SpringBoot-Actuator
+    </h1>
+  
+
+      
+      <div class="article-meta">
+        <span class="article-date">
+    <i class="icon icon-calendar-check"></i>
+	<a href="/2021/02/01/SpringBoot-Actuator/" class="article-date">
+	  <time datetime="2021-02-01T06:42:34.000Z" itemprop="datePublished">2021-02-01</time>
+	</a>
+</span>
+        
+  <span class="article-category">
+    <i class="icon icon-folder"></i>
+    <a class="article-category-link" href="/categories/Java/">Java</a>
+  </span>
+
+        
+  <span class="article-tag">
+    <i class="icon icon-tags"></i>
+	<a class="article-tag-link-link" href="/tags/Actuator/" rel="tag">Actuator</a>, <a class="article-tag-link-link" href="/tags/SpringBoot/" rel="tag">SpringBoot</a>
+  </span>
+
+
+        
+	<span class="article-read hidden-xs">
+	    <i class="icon icon-eye-fill" aria-hidden="true"></i>
+	    <span id="busuanzi_container_page_pv">
+			<span id="busuanzi_value_page_pv">0</span>
+		</span>
+	</span>
+
+
+        <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2021/02/01/SpringBoot-Actuator/#comments" class="article-comment-link">评论</a></span>
+        
+	
+		<span class="post-wordcount hidden-xs" itemprop="wordCount">字数统计: 1.4k(字)</span>
+	
+	
+		<span class="post-readcount hidden-xs" itemprop="timeRequired">阅读时长: 6(分)</span>
+	
+
+      </div>
+    </div>
+    <div class="article-entry marked-body" itemprop="articleBody">
+      
+        <h1 id="SpringBoot-Actuator"><a href="#SpringBoot-Actuator" class="headerlink" title="SpringBoot Actuator"></a>SpringBoot Actuator</h1><h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>Actuator是SpringBoot抽取出来的指标监控模块</p>
+<h2 id="使用步骤"><a href="#使用步骤" class="headerlink" title="使用步骤"></a>使用步骤</h2><ol>
+<li><p>引入场景</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-starter-actuator<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>访问 <a target="_blank" rel="noopener" href="http://localhost:8080/actuator">http://localhost:8080/actuator</a></p>
+</li>
+<li><p>配置</p>
+<ol>
+<li><p>因为默认的http配置仅仅暴露少数endpoints, 想看到其他信息需要我们配置</p>
+</li>
+<li><p>在application.properties中加入</p>
+<ol>
+<li><p>全部开启</p>
+<figure class="highlight properties"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># management 是所有actuator的配置</span></span><br><span class="line"><span class="attr">management.endpoints.enabled-by-default</span>=<span class="string">true</span></span><br><span class="line"><span class="comment"># web方式暴露所有端点</span></span><br><span class="line"><span class="attr">management.endpoints.web.exposure.include</span>=<span class="string">*</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>手动开启</p>
+<figure class="highlight properties"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">management.endpoint.health.show-details</span>=<span class="string">always</span></span><br><span class="line"><span class="attr">management.endpoint.health.enabled</span>=<span class="string">true</span></span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+</li>
+</ol>
+</li>
+<li><p>访问其他监控模块数据</p>
+<p><a target="_blank" rel="noopener" href="http://localhost:8080/actuator/beans">http://localhost:8080/actuator/beans</a></p>
+<p><a target="_blank" rel="noopener" href="http://localhost:8080/actuator/configprops">http://localhost:8080/actuator/configprops</a></p>
+<p><a target="_blank" rel="noopener" href="http://localhost:8080/actuator/metrics">http://localhost:8080/actuator/metrics</a></p>
+<p><a target="_blank" rel="noopener" href="http://localhost:8080/actuator/metrics/jvm.gc.pause">http://localhost:8080/actuator/metrics/jvm.gc.pause</a></p>
+<p><a target="_blank" rel="noopener" href="http://localhost:8080/actuator/metrics">http://localhost:8080/actuator/</a>endpointName/detailPath</p>
+<p>等等…</p>
+</li>
+<li><p>数据格式为json: 可以使用安装了json解析插件的chrome浏览器或者火狐浏览器查看</p>
+</li>
+</ol>
+<h2 id="EndPoint"><a href="#EndPoint" class="headerlink" title="EndPoint"></a>EndPoint</h2><h3 id="最常使用的端点"><a href="#最常使用的端点" class="headerlink" title="最常使用的端点"></a>最常使用的端点</h3><table>
+<thead>
+<tr>
+<th>ID</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>auditevents</code></td>
+<td>暴露当前应用程序的审核事件信息。需要一个<code>AuditEventRepository组件</code>。</td>
+</tr>
+<tr>
+<td><code>beans</code></td>
+<td>显示应用程序中所有Spring Bean的完整列表。</td>
+</tr>
+<tr>
+<td><code>caches</code></td>
+<td>暴露可用的缓存。</td>
+</tr>
+<tr>
+<td><code>conditions</code></td>
+<td>显示自动配置的所有条件信息，包括匹配或不匹配的原因。</td>
+</tr>
+<tr>
+<td><code>configprops</code></td>
+<td>显示所有<code>@ConfigurationProperties</code>。</td>
+</tr>
+<tr>
+<td><code>env</code></td>
+<td>暴露Spring的属性<code>ConfigurableEnvironment</code></td>
+</tr>
+<tr>
+<td><code>flyway</code></td>
+<td>显示已应用的所有Flyway数据库迁移。 需要一个或多个<code>Flyway</code>组件。</td>
+</tr>
+<tr>
+<td><code>health</code></td>
+<td>显示应用程序运行状况信息。</td>
+</tr>
+<tr>
+<td><code>httptrace</code></td>
+<td>显示HTTP跟踪信息（默认情况下，最近100个HTTP请求-响应）。需要一个<code>HttpTraceRepository</code>组件。</td>
+</tr>
+<tr>
+<td><code>info</code></td>
+<td>显示应用程序信息。</td>
+</tr>
+<tr>
+<td><code>integrationgraph</code></td>
+<td>显示Spring <code>integrationgraph</code> 。需要依赖<code>spring-integration-core</code>。</td>
+</tr>
+<tr>
+<td><code>loggers</code></td>
+<td>显示和修改应用程序中日志的配置。</td>
+</tr>
+<tr>
+<td><code>liquibase</code></td>
+<td>显示已应用的所有Liquibase数据库迁移。需要一个或多个<code>Liquibase</code>组件。</td>
+</tr>
+<tr>
+<td><code>metrics</code></td>
+<td>显示当前应用程序的“指标”信息。</td>
+</tr>
+<tr>
+<td><code>mappings</code></td>
+<td>显示所有<code>@RequestMapping</code>路径列表。</td>
+</tr>
+<tr>
+<td><code>scheduledtasks</code></td>
+<td>显示应用程序中的计划任务。</td>
+</tr>
+<tr>
+<td><code>sessions</code></td>
+<td>允许从Spring Session支持的会话存储中检索和删除用户会话。需要使用Spring Session的基于Servlet的Web应用程序。</td>
+</tr>
+<tr>
+<td><code>shutdown</code></td>
+<td>使应用程序正常关闭。默认禁用。</td>
+</tr>
+<tr>
+<td><code>startup</code></td>
+<td>显示由<code>ApplicationStartup</code>收集的启动步骤数据。需要使用<code>SpringApplication</code>进行配置<code>BufferingApplicationStartup</code>。</td>
+</tr>
+<tr>
+<td><code>threaddump</code></td>
+<td>执行线程转储。</td>
+</tr>
+</tbody></table>
+<p>如果您的应用程序是Web应用程序（Spring MVC，Spring WebFlux或Jersey），则可以使用以下附加端点：</p>
+<table>
+<thead>
+<tr>
+<th>ID</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>heapdump</code></td>
+<td>返回<code>hprof</code>堆转储文件。</td>
+</tr>
+<tr>
+<td><code>jolokia</code></td>
+<td>通过HTTP暴露JMX bean（需要引入Jolokia，不适用于WebFlux）。需要引入依赖<code>jolokia-core</code>。</td>
+</tr>
+<tr>
+<td><code>logfile</code></td>
+<td>返回日志文件的内容（如果已设置<code>logging.file.name</code>或<code>logging.file.path</code>属性）。支持使用HTTP<code>Range</code>标头来检索部分日志文件的内容。</td>
+</tr>
+<tr>
+<td><code>prometheus</code></td>
+<td>以Prometheus服务器可以抓取的格式公开指标。需要依赖<code>micrometer-registry-prometheus</code>。</td>
+</tr>
+</tbody></table>
+<p>最常用的Endpoint</p>
+<ul>
+<li><strong>Health：监控状况</strong></li>
+<li><strong>Metrics：运行时指标</strong></li>
+<li><strong>Loggers：日志记录</strong></li>
+</ul>
+<h3 id="健康监控"><a href="#健康监控" class="headerlink" title="健康监控"></a>健康监控</h3><ol>
+<li>常用于应用健康检查</li>
+<li>配置显示详细信息<code>management.endpoint.health.show-details=always</code></li>
+<li>访问<a target="_blank" rel="noopener" href="http://localhost:8080/actuator/health">http://localhost:8080/actuator/health</a></li>
+</ol>
+<h3 id="Metrics"><a href="#Metrics" class="headerlink" title="Metrics"></a>Metrics</h3><ol>
+<li>提供详细的、层级的、空间指标信息，这些信息可以被pull（主动推送）或者push（被动获取）方式得到</li>
+</ol>
+<h2 id="定制Endpoint"><a href="#定制Endpoint" class="headerlink" title="定制Endpoint"></a>定制Endpoint</h2><h3 id="定制health信息"><a href="#定制health信息" class="headerlink" title="定制health信息"></a>定制health信息</h3><ol>
+<li><p>在项目中建一个package名为health用于配置</p>
+</li>
+<li><p>新建一个类继承AbstractHealthIndicator,并重写方法doHealthCheck</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Component</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">MyComHealthIndicator</span> <span class="keyword">extends</span> <span class="title class_">AbstractHealthIndicator</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 真实的检查方法</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> builder</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@throws</span> Exception</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">protected</span> <span class="keyword">void</span> <span class="title function_">doHealthCheck</span><span class="params">(Health.Builder builder)</span> <span class="keyword">throws</span> Exception &#123;</span><br><span class="line">        <span class="comment">//mongodb。  获取连接进行测试</span></span><br><span class="line">        Map&lt;String,Object&gt; map = <span class="keyword">new</span> <span class="title class_">HashMap</span>&lt;&gt;();</span><br><span class="line">        <span class="comment">// 检查完成</span></span><br><span class="line">        <span class="keyword">if</span>(<span class="number">1</span> == <span class="number">2</span>)&#123;</span><br><span class="line"><span class="comment">//            builder.up(); //健康</span></span><br><span class="line">            builder.status(Status.UP);</span><br><span class="line">            map.put(<span class="string">&quot;count&quot;</span>,<span class="number">1</span>);</span><br><span class="line">            map.put(<span class="string">&quot;ms&quot;</span>,<span class="number">100</span>);</span><br><span class="line">        &#125;<span class="keyword">else</span> &#123;</span><br><span class="line"><span class="comment">//            builder.down();</span></span><br><span class="line">            builder.status(Status.OUT_OF_SERVICE);</span><br><span class="line">            map.put(<span class="string">&quot;err&quot;</span>,<span class="string">&quot;连接超时&quot;</span>);</span><br><span class="line">            map.put(<span class="string">&quot;ms&quot;</span>,<span class="number">3000</span>);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        builder.withDetail(<span class="string">&quot;code&quot;</span>,<span class="number">100</span>)</span><br><span class="line">                .withDetails(map);</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>在localhost:8080/actuator/health访问可以看到我们定制的信息</p>
+<p><img src="image-20210201151704132.png" alt="image-20210201151704132"></p>
+</li>
+</ol>
+<h3 id="自定义info"><a href="#自定义info" class="headerlink" title="自定义info"></a>自定义info</h3><ol>
+<li><p>编写配置文件</p>
+<figure class="highlight properties"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">info.app</span>:<span class="string">saas-tag</span></span><br><span class="line"><span class="attr">info.version</span>:<span class="string">1.0.0</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>直接访问<a target="_blank" rel="noopener" href="http://localhost:8080/actuator/info">http://localhost:8080/actuator/info</a></p>
+<p><img src="image-20210201152145345.png" alt="image-20210201152145345"></p>
+</li>
+<li><p>自定义</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.famesmart.actuator.info;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> org.springframework.boot.actuate.info.Info;</span><br><span class="line"><span class="keyword">import</span> org.springframework.boot.actuate.info.InfoContributor;</span><br><span class="line"><span class="keyword">import</span> org.springframework.stereotype.Component;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.util.Collections;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@Author</span> Yiqing Zhang</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@Date</span> 2021-02-01 3:25 p.m.</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@Version</span> 1.0</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="meta">@Component</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">AppInfoInfoContributor</span> <span class="keyword">implements</span> <span class="title class_">InfoContributor</span> &#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">contribute</span><span class="params">(Info.Builder builder)</span> &#123;</span><br><span class="line">        builder.withDetail(<span class="string">&quot;msg&quot;</span>,<span class="string">&quot;Hello&quot;</span>)</span><br><span class="line">                .withDetails(Collections.singletonMap(<span class="string">&quot;world&quot;</span>,<span class="string">&quot;123&quot;</span>));</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>显示的是所有信息结合</p>
+<p><img src="image-20210201155109689.png" alt="image-20210201155109689"></p>
+</li>
+</ol>
+<h3 id="定制Metrics"><a href="#定制Metrics" class="headerlink" title="定制Metrics"></a>定制Metrics</h3><p>增加我们自定义的Metrics</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">MyService</span>&#123;</span><br><span class="line">    Counter counter;</span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">MyService</span><span class="params">(MeterRegistry meterRegistry)</span>&#123;</span><br><span class="line">         counter = meterRegistry.counter(<span class="string">&quot;myservice.method.running.counter&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">hello</span><span class="params">()</span> &#123;</span><br><span class="line">        counter.increment();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//也可以使用下面的方式</span></span><br><span class="line"><span class="meta">@Bean</span></span><br><span class="line">MeterBinder <span class="title function_">queueSize</span><span class="params">(Queue queue)</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> (registry) -&gt; Gauge.builder(<span class="string">&quot;queueSize&quot;</span>, queue::size).register(registry);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="定制EndPoint"><a href="#定制EndPoint" class="headerlink" title="定制EndPoint"></a>定制EndPoint</h3><ol>
+<li><p>自定义类</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.famesmart.actuator.endpoint;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> org.springframework.boot.actuate.endpoint.annotation.Endpoint;</span><br><span class="line"><span class="keyword">import</span> org.springframework.boot.actuate.endpoint.annotation.ReadOperation;</span><br><span class="line"><span class="keyword">import</span> org.springframework.boot.actuate.endpoint.annotation.WriteOperation;</span><br><span class="line"><span class="keyword">import</span> org.springframework.stereotype.Component;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.util.Collections;</span><br><span class="line"><span class="keyword">import</span> java.util.Map;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@Author</span> Yiqing Zhang</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@Date</span> 2021-02-01 4:04 p.m.</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@Version</span> 1.0</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="meta">@Component</span></span><br><span class="line"><span class="meta">@Endpoint(id=&quot;myService&quot;)</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">MyServiceEndPoint</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@ReadOperation</span></span><br><span class="line">    <span class="keyword">public</span> Map <span class="title function_">getDockerInfo</span><span class="params">()</span>&#123;</span><br><span class="line">        <span class="comment">// 端点的读操作</span></span><br><span class="line">        <span class="keyword">return</span> Collections.singletonMap(<span class="string">&quot;dockerInfo&quot;</span>,<span class="string">&quot;docker started...&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@WriteOperation</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">stopDocker</span><span class="params">()</span>&#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;docker stopped...&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>访问我们自定义id的链接</p>
+<p><img src="image-20210201160950299.png" alt="image-20210201160950299"></p>
+</li>
+</ol>
+<h2 id="可视化页面"><a href="#可视化页面" class="headerlink" title="可视化页面"></a>可视化页面</h2><ol>
+<li><p>新建一个spring-boot项目作为server</p>
+<ol>
+<li><p>在pom引入</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>de.codecentric<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-admin-starter-server<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">version</span>&gt;</span>2.3.1<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+</li>
+<li><p>其他服务作为客户端</p>
+<ol>
+<li><p>在pom中引入</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>de.codecentric<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-admin-starter-client<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">version</span>&gt;</span>2.3.1<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>配置</p>
+<p>注意这个client.url写步骤1中的服务的地址</p>
+<figure class="highlight properties"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">spring.boot.admin.client.url</span>=<span class="string">http://localhost:8888</span></span><br><span class="line"><span class="attr">spring.application.name</span>=<span class="string">saas-tag</span></span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+</li>
+<li><p>启动server,打开网页</p>
+<p><img src="image-20210201163720363.png" alt="image-20210201163720363"></p>
+<p><img src="image-20210201163824913.png" alt="image-20210201163824913"></p>
+</li>
+</ol>
+
+      
+    </div>
+    <div class="article-footer">
+      <blockquote class="mt-2x">
+  <ul class="post-copyright list-unstyled">
+    
+    <li class="post-copyright-link hidden-xs">
+      <strong>本文链接：</strong>
+      <a href="http://yiiiqing.github.io/2021/02/01/SpringBoot-Actuator/" title="SpringBoot-Actuator" target="_blank" rel="external">http://yiiiqing.github.io/2021/02/01/SpringBoot-Actuator/</a>
+    </li>
+    
+    <li class="post-copyright-license">
+      <strong>版权声明： </strong> 本博客所有文章除特别声明外，均采用 <a href="http://creativecommons.org/licenses/by/4.0/deed.zh" target="_blank" rel="external">CC BY 4.0 CN协议</a> 许可协议。转载请注明出处！
+    </li>
+  </ul>
+</blockquote>
+
+
+<div class="panel panel-default panel-badger">
+  <div class="panel-body">
+    <figure class="media">
+      <div class="media-left">
+        <a href="https://github.com/yiiiqing" target="_blank" class="img-burn thumb-sm visible-lg">
+          <img src="/images/avatar.jpg" class="img-rounded w-full" alt="">
+        </a>
+      </div>
+      <div class="media-body">
+        <h3 class="media-heading"><a href="https://github.com/yiiiqing" target="_blank"><span class="text-dark">Yiqing</span><small class="ml-1x">Web Developer</small></a></h3>
+        <div>一位打工人</div>
+      </div>
+    </figure>
+  </div>
+</div>
+
+
+    </div>
+  </article>
+  
+    
+  <section id="comments">
+  	
+      <div id="lv-container" data-id="city" data-uid="MTAyMC81MTg5OS8yODM4MA==">
+        <noscript> 为正常使用来必力评论功能请激活JavaScript</noscript>
+      </div>    
+    
+  </section>
+
+
+  
+</div>
+
+  <nav class="bar bar-footer clearfix" data-stick-bottom>
+  <div class="bar-inner">
+  
+  <ul class="pager pull-left">
+    
+    <li class="prev">
+      <a href="/2021/02/02/SpringBoot%E5%90%AF%E5%8A%A8%E8%BF%87%E7%A8%8B/" title="SpringBoot启动过程"><i class="icon icon-angle-left" aria-hidden="true"></i><span>&nbsp;&nbsp;上一篇</span></a>
+    </li>
+    
+    
+    <li class="next">
+      <a href="/2021/01/22/SpringBoot-%E6%8B%A6%E6%88%AA%E5%99%A8Interceptor/" title="SpringBoot-拦截器Interceptor"><span>下一篇&nbsp;&nbsp;</span><i class="icon icon-angle-right" aria-hidden="true"></i></a>
+    </li>
+    
+    
+  </ul>
+  
+  
+  <!-- Button trigger modal -->
+  <button type="button" class="btn btn-fancy btn-donate pop-onhover bg-gradient-warning" data-toggle="modal" data-target="#donateModal"><span>赏</span></button>
+  <!-- <div class="wave-icon wave-icon-danger btn-donate" data-toggle="modal" data-target="#donateModal">
+    <div class="wave-circle"><span class="icon"><i class="icon icon-bill"></i></span></div>
+  </div> -->
+  
+  
+  <div class="bar-right">
+    
+    <div class="share-component" data-sites="weibo,qq,wechat,facebook,twitter" data-mobile-sites="weibo,qq,qzone"></div>
+    
+  </div>
+  </div>
+</nav>
+  
+<!-- Modal -->
+<div class="modal modal-center modal-small modal-xs-full fade" id="donateModal" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content donate">
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+      <div class="modal-body">
+        <div class="donate-box">
+          <div class="donate-head">
+            <p>感谢您的支持，我会继续努力的!</p>
+          </div>
+          <div class="tab-content">
+            <div role="tabpanel" class="tab-pane fade active in" id="alipay">
+              <div class="donate-payimg">
+                <img src="/images/donate/alipayimg.png" alt="扫码支持" title="扫一扫" />
+              </div>
+              <p class="text-muted mv">扫码打赏，你说多少就多少</p>
+              <p class="text-grey">打开支付宝扫一扫，即可进行扫码打赏哦</p>
+            </div>
+            <div role="tabpanel" class="tab-pane fade" id="wechatpay">
+              <div class="donate-payimg">
+                <img src="/images/donate/wechatpayimg.png" alt="扫码支持" title="扫一扫" />
+              </div>
+              <p class="text-muted mv">扫码打赏，你说多少就多少</p>
+              <p class="text-grey">打开微信扫一扫，即可进行扫码打赏哦</p>
+            </div>
+          </div>
+          <div class="donate-footer">
+            <ul class="nav nav-tabs nav-justified" role="tablist">
+              <li role="presentation" class="active">
+                <a href="#alipay" id="alipay-tab" role="tab" data-toggle="tab" aria-controls="alipay" aria-expanded="true"><i class="icon icon-alipay"></i> 支付宝</a>
+              </li>
+              <li role="presentation" class="">
+                <a href="#wechatpay" role="tab" id="wechatpay-tab" data-toggle="tab" aria-controls="wechatpay" aria-expanded="false"><i class="icon icon-wepay"></i> 微信支付</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+</main>
+
+  <footer class="footer" itemscope itemtype="http://schema.org/WPFooter">
+	
+	
+    <ul class="social-links">
+    	
+        <li><a href="https://github.com/yiiiqing" target="_blank" title="Github" data-toggle=tooltip data-placement=top><i class="icon icon-github"></i></a></li>
+        
+        <li><a href="https://weibo.com/6370670336/profile?topnav=1&wvr=6&is_all=1" target="_blank" title="Weibo" data-toggle=tooltip data-placement=top><i class="icon icon-weibo"></i></a></li>
+        
+    </ul>
+
+    <div class="copyright">
+    	
+        <div class="publishby">
+        	Theme by <a href="https://github.com/cofess" target="_blank"> cofess </a>base on <a href="https://github.com/cofess/hexo-theme-pure" target="_blank">pure</a>.
+        </div>
+    </div>
+</footer>
+  <script src="//cdn.jsdelivr.net/npm/jquery@1.12.4/dist/jquery.min.js"></script>
+<script>
+window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')
+</script>
+
+<script src="/js/plugin.min.js"></script>
+
+
+<script src="/js/application.js"></script>
+
+
+    <script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: '文章',
+            PAGES: '页面',
+            CATEGORIES: '分类',
+            TAGS: '标签',
+            UNTITLED: '(未命名)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+
+<script src="/js/insight.js"></script>
+
+
+
+
+
+
+   
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+   
+    
+<script defer type="text/javascript">
+  (function(d, s) {
+    var j, e = d.getElementsByTagName(s)[0];
+
+    if (typeof LivereTower === 'function') { return; }
+
+    j = d.createElement(s);
+    j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+    j.async = true;
+
+    e.parentNode.insertBefore(j, e);
+  })(document, 'script');
+</script>
+
+
+
+
+
+
+
+
+</body>
+</html>
