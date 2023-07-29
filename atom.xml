@@ -6,7 +6,7 @@
   <link href="http://yiiiqing.github.io/atom.xml" rel="self"/>
   
   <link href="http://yiiiqing.github.io/"/>
-  <updated>2023-05-25T08:00:34.000Z</updated>
+  <updated>2023-07-29T06:44:17.804Z</updated>
   <id>http://yiiiqing.github.io/</id>
   
   <author>
@@ -15,6 +15,32 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>使用 CompletableFuture 解决接口大 payload 处理慢的问题</title>
+    <link href="http://yiiiqing.github.io/2023/07/29/%E4%BD%BF%E7%94%A8-CompletableFuture-%E8%A7%A3%E5%86%B3%E6%8E%A5%E5%8F%A3%E5%A4%A7-payload-%E5%A4%84%E7%90%86%E6%85%A2%E7%9A%84%E9%97%AE%E9%A2%98/"/>
+    <id>http://yiiiqing.github.io/2023/07/29/%E4%BD%BF%E7%94%A8-CompletableFuture-%E8%A7%A3%E5%86%B3%E6%8E%A5%E5%8F%A3%E5%A4%A7-payload-%E5%A4%84%E7%90%86%E6%85%A2%E7%9A%84%E9%97%AE%E9%A2%98/</id>
+    <published>2023-07-29T06:41:47.000Z</published>
+    <updated>2023-07-29T06:44:17.804Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="使用-CompletableFuture-解决接口大-payload-处理慢的问题"><a href="#使用-CompletableFuture-解决接口大-payload-处理慢的问题" class="headerlink" title="使用 CompletableFuture 解决接口大 payload 处理慢的问题"></a>使用 CompletableFuture 解决接口大 payload 处理慢的问题</h1><h2 id="Intro"><a href="#Intro" class="headerlink" title="Intro"></a>Intro</h2><p>最近在项目中遇到一个接口需要减少响应时间. 这个接口的操作步骤有很多步.于是脑子就想起了流处理+异步, 尝试使用了 Java 的 CompletableFuture. 达到了预期的效果</p><p>背景是: 一个接口需要接收几万条数据的一个大 json 列表将所有符合条件的数据入库.</p><p><strong>至于 CompletableFuture 的用法本篇不再赘述.</strong></p><h2 id="实战"><a href="#实战" class="headerlink" title="实战"></a>实战</h2><p>于是分一下几步:</p><ol><li>初始化返回 response 类(因为不管参数校验或者报错都要返回调用方)</li><li>将所有的数据进行参数校验</li><li>检查是否已经在库中(db 操作)</li><li>将不在库中的数据进行插入</li><li>将插入成功的数据对应的那条 response 类设置为成功</li></ol><p>有几个问题需要关注一下:</p><ol><li>如何在流处理中前面步骤失败的情况下跳过本步骤?</li><li>介于 CompletableFuture 会返回 Future 类. 采取怎样的方式去收集所有的流处理数据结果?</li></ol><p>解决方案:</p><ol><li><p>因为每一步其实都是 response 类在传递. response 类中添加一个 flag 来标记是否该条数据处理完成. 并且在 response 类中保存 request</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Response</span>&#123;</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">volatile</span> <span class="type">boolean</span> completeFlag;</span><br><span class="line">  Request r;</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">public</span> <span class="type">boolean</span> <span class="title function_">isCompleteFlag</span><span class="params">()</span>&#123; <span class="keyword">return</span> completeFlag; &#125;</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">public</span> <span class="type">boolean</span> <span class="title function_">setCompleteFlag</span><span class="params">(<span class="type">boolean</span> flag)</span>&#123; <span class="built_in">this</span>.completeFlag = flag; &#125;</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">public</span> <span class="type">boolean</span> <span class="title function_">markComplete</span><span class="params">()</span>&#123;setCompleteFlag(<span class="literal">true</span>);&#125;</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">setRequest</span><span class="params">(Request r)</span>&#123;<span class="built_in">this</span>.r=r;&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li><li><p>在循环处理每一条数据之前创建一个 list, 通过 list 去存所有的 future. 将 CompletableFuture 流处理结果存入 list 中.</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">ArrayList&lt;CompletableFuture&lt;Response&gt;&gt; list = <span class="keyword">new</span> <span class="title class_">ArrayList</span>&lt;&gt;(size); <span class="comment">// size is batch size</span></span><br><span class="line"><span class="keyword">for</span>(Request r: requestList)&#123;</span><br><span class="line">  CompletableFuture&lt;Response&gt; future = CompletableFuture</span><br><span class="line">    .supplyAssync(()-&gt;r)</span><br><span class="line">    .thenApply(xxx) <span class="comment">// 这里是要传入一些Function, 所以需要自定义一些 Function 类</span></span><br><span class="line">    .thenApply(xxx)</span><br><span class="line">    .handle(xxx); <span class="comment">// 当然必须 handle 一下 error</span></span><br><span class="line">  list.add(future);</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 在最后等待获取结果</span></span><br><span class="line">CompletableFuture&lt;Void&gt; allOf = CompletableFuture.allOf(list.toArray(<span class="keyword">new</span> <span class="title class_">CompletableFuture</span>[]));</span><br><span class="line">allOf.join();</span><br><span class="line"></span><br><span class="line"><span class="comment">// 使用流处理的方式获取所有结果</span></span><br><span class="line">allOf</span><br><span class="line">  .thenApply(v -&gt; list.stream()</span><br><span class="line">             .map(CompletableFuture::join)</span><br><span class="line">             .collect(Collectors.toList()) <span class="comment">// 获取每个 list 成员的结果</span></span><br><span class="line">            )</span><br><span class="line">  .join().stream() <span class="comment">// stream of Response</span></span><br><span class="line">  .collect(Collectors.toList()) <span class="comment">// list of Response</span></span><br></pre></td></tr></table></figure></li></ol><h2 id="结果"><a href="#结果" class="headerlink" title="结果"></a>结果</h2><p>以 25k 条 json object 数据为例:</p><ul><li>修改前处理总时间需要最快 90 秒</li><li>采用流处理后时间基本稳定在 20 - 30秒</li></ul><p>所以, 个人认为, <strong>Stream + CompletableFuture + 线程池</strong> 这三者对于这种高并发的时刻成效显著.</p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;h1 id=&quot;使用-CompletableFuture-解决接口大-payload-处理慢的问题&quot;&gt;&lt;a href=&quot;#使用-CompletableFuture-解决接口大-payload-处理慢的问题&quot; class=&quot;headerlink&quot; title=&quot;使用 Complet</summary>
+      
+    
+    
+    
+    <category term="Java" scheme="http://yiiiqing.github.io/categories/Java/"/>
+    
+    
+    <category term="并发" scheme="http://yiiiqing.github.io/tags/%E5%B9%B6%E5%8F%91/"/>
+    
+    <category term="Web" scheme="http://yiiiqing.github.io/tags/Web/"/>
+    
+  </entry>
   
   <entry>
     <title>Spring-BeanFactory和FactoryBean的区别</title>
@@ -472,26 +498,6 @@
     
     
     <category term="Java8" scheme="http://yiiiqing.github.io/tags/Java8/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Maven依赖冲突解决方法</title>
-    <link href="http://yiiiqing.github.io/2021/07/09/Maven%E4%BE%9D%E8%B5%96%E5%86%B2%E7%AA%81%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95/"/>
-    <id>http://yiiiqing.github.io/2021/07/09/Maven%E4%BE%9D%E8%B5%96%E5%86%B2%E7%AA%81%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95/</id>
-    <published>2021-07-09T09:10:35.000Z</published>
-    <updated>2021-07-09T09:11:39.000Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="Maven依赖冲突解决方法"><a href="#Maven依赖冲突解决方法" class="headerlink" title="Maven依赖冲突解决方法"></a>Maven依赖冲突解决方法</h1><h2 id="案例"><a href="#案例" class="headerlink" title="案例"></a>案例</h2><p>修改项目依赖后,程序出现NoSuchMethodError 或者 ClassNotFoundException 或者类似的异常,大概率是因为依赖冲突</p><h2 id="原因"><a href="#原因" class="headerlink" title="原因"></a>原因</h2><p>对于一个 Project 的依赖:</p><ol><li>直接依赖</li></ol>]]></content>
-    
-    
-      
-      
-    <summary type="html">&lt;h1 id=&quot;Maven依赖冲突解决方法&quot;&gt;&lt;a href=&quot;#Maven依赖冲突解决方法&quot; class=&quot;headerlink&quot; title=&quot;Maven依赖冲突解决方法&quot;&gt;&lt;/a&gt;Maven依赖冲突解决方法&lt;/h1&gt;&lt;h2 id=&quot;案例&quot;&gt;&lt;a href=&quot;#案例&quot; cla</summary>
-      
-    
-    
-    
     
   </entry>
   
